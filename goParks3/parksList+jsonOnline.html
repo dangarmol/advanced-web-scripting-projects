@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Parks Listing with JSON</title>
+<link rel="stylesheet" type="text/css" href="styles/style.css">
+
+<!-- import data directly from javascript file into parksListJSON-->
+<script type="text/javascript" src="http://homepages.herts.ac.uk/~comqgrs/goParks/parks.js"></script>
+
+<script type="text/javascript">
+function displayParks() {
+	console.log('displaying parks header...')
+	var parksListHTML = '<table id="parksTable"><thead><tr><th>Name</th><th>Location</th></tr></thead>'
+	for (var parkName in parksListJSON) {
+		// store local reference to park being displayed 
+		var park = parksListJSON[parkName];
+		console.log('  displaying ' + park.displayName);
+		
+		// generate HTML table row for park
+		var parkHTML = '<tr id="' + parkName + '"><td>' + park.displayName + '</td><td>' + park.location + '</td></tr>' ;
+		// console.log('  ' + parkHTML);
+		parksListHTML += parkHTML;
+		
+	}
+	parksListHTML += '</table>';
+	console.log('  ' + parksListHTML);
+	document.getElementById("parksList").innerHTML=parksListHTML;
+}
+</script>
+
+</head>
+<body>
+
+<h1>goParks </h1>
+<p>Lets go ... <a href="javascript:displayParks()">display the parks!</a></p>
+
+<div id="parksList">
+</div>
+
+</body>
+</html>
+
+
