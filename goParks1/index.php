@@ -15,11 +15,11 @@
 
 	<?php
 	// Create connection
-	$conn = new mysqli("localhost", "root", "", "goparks");
+	$conn = new mysqli("localhost", "root", "", "goparks"); //Creates the connection to the database
 
 	// Execute query
-	$q = 'select displayName, council from parks';
-	$result = mysqli_query($conn,$q);
+	$q = 'select displayName, council from parks'; //Creates the query
+	$result = mysqli_query($conn,$q); //Executes the query
 
 	// Output results in table rows
 	if ($result->num_rows > 0) {
