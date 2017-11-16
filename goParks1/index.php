@@ -15,7 +15,7 @@
 
 	<?php
 	// Create connection
-	$conn = new mysqli("localhost", "root", "", "goParks"); //PHP doesn't work with the array.
+	$conn = new mysqli("localhost", "root", "", "goParks");
 
 	// Execute query
 	$q = 'select displayName, council from parks';
