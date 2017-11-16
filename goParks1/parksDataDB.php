@@ -9,7 +9,8 @@ function get_parks_list()
 	global $conn;
 
 	// Execute query
-	$q = 'select id, displayName, council from parks';
+	//$q = 'select id, displayName, council from parks'; //Original (database is designed without ID)
+	$q = 'select displayName, council from parks';
 	$result = mysqli_query($conn,$q);
 
 	// Start to build results array
@@ -21,7 +22,7 @@ function get_parks_list()
 		while($row = $result->fetch_assoc()) {
 			$park = 
 				array(
-					'id' => $row["id"], 
+					//'id' => $row["id"], //Not currently in database
 					'name' => $row["displayName"], 
 					'region' => $row["council"]);
 			$output []= $park;
