@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Embedding Scripts</title>
+</head>
+<body>
+<h1>A drawing script</h1>
+<p>The drawing created in this page is embedded using an iFrame and comes from the local circles.html page.</p>
+  
+<iframe src="circles.html"  width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+<p>
+<button onclick="javascript:document.querySelector('iFrame').contentWindow.fillStyle = 'rgba(0,0,255,0.5)';">Use blue</button>
+... when drawing</p>
+</body>
+</html>

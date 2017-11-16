@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>goParks</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="style.css"> <!-- Specifies to use the CSS file -->
 </head>
 <body>
 <h1>goParks</h1>
@@ -15,11 +15,11 @@
 
 	<?php
 	// Create connection
-	$conn = new mysqli("localhost", "root", "", "goparks"); //Creates the connection to the database
+	$conn = new mysqli("localhost", "root", "", "goParks"); //PHP doesn't work with the array.
 
 	// Execute query
-	$q = 'select displayName, council from parks'; //Creates the query
-	$result = mysqli_query($conn,$q); //Executes the query
+	$q = 'select displayName, council from parks';
+	$result = mysqli_query($conn,$q);
 
 	// Output results in table rows
 	if ($result->num_rows > 0) {

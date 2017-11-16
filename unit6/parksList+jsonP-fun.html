@@ -3,11 +3,13 @@
 <title>Parks Listing with JSON</title>
 <link rel="stylesheet" type="text/css" href="styles/style.css">
 
-<!-- import data directly from javascript file into parksListJSON-->
+<!-- old version imported data directly from javascript file into parksListJSON using 
 <script type="text/javascript" src="http://homepages.herts.ac.uk/~comqgrs/goParks/parks.js"></script>
+-->
+
 
 <script type="text/javascript">
-function displayParks() {
+function displayParks(parksListJSON) {
 	console.log('displaying parks header...')
 	var parksListHTML = '<table id="parksTable"><thead><tr><th>Name</th><th>Location</th></tr></thead>'
 	for (var parkName in parksListJSON) {
@@ -31,10 +33,14 @@ function displayParks() {
 <body>
 
 <h1>goParks </h1>
-<p>Lets go ... <a href="javascript:displayParks()">display the parks!</a></p>
+<p>Lets go ...  the parks should be displayed!</p>
 
 <div id="parksList">
 </div>
+
+<!-- new  version imports data directly from PHP script which return data -->
+<script type="text/javascript" src="http://homepages.herts.ac.uk/~comqgrs/goParks/parksJSONP.php?function=displayParks"></script>
+
 
 </body>
 </html>

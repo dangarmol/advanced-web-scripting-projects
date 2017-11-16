@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Check-in to LF233, College Lane</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+      }
+	  #controls {
+		position: absolute;
+		top: 50px;
+		left: 10px;
+		z-index: 5;
+		background: rgba(255,255,255,0.2);
+		padding: 10px;
+		}
+      #map {
+        height: 100%;
+		z-index: 1;
+      }
+    </style>
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry"></script>
+
+<script type="text/javascript">
+// This example uses the Google Maps API to show UH and College Lane Reception on old map
+
+// basic variables for API objects
+var mapUH;
+var roomShape;
+var markerCurrent; 
+
+// positions of POIs	
+var latlngUH = {lat: 51.75175, lng: -0.2410};
+var latlngReception = {lat: 51.752710, lng: -0.242250};  // ... of old reception
+
+function initmap() {
+  console.log("loading map");
+
+  mapUH = new google.maps.Map(document.getElementById('map'), {
+    zoom: 19,
+    zoomControl: true,
+    center: latlngUH	
+  })
+	
+  initLocation();		// place initial marker
+  initRoom();
+}
+
+function initLocation() {
+	console.log("placing UH reception");
+
+	var markerUH = new google.maps.Marker(
+		{
+		position: latlngReception,
+		map: mapUH,
+		title: "Old reception, now Chapman Lounge south west door"
+		}
+	);  
+}
+
+function initRoom() {
+	console.log("placing UH reception");
+
+	// Define the LatLng coordinates for the room B400.
+	roomCoords = [	
+		{lat: 51.7513814, lng: -0.2420833},
+		{lat: 51.7513831, lng: -0.2419827},
+		{lat: 51.7513341, lng: -0.2419827},
+		{lat: 51.7513316, lng: -0.2420833}
+	];
+
+	// Construct the polygon.
+	roomShape = new google.maps.Polygon({
+		paths: roomCoords,
+		// editable: true, // remove comment at start to make editable
+		strokeColor: '#FF0000',
+		strokeOpacity: 0.8,
+		strokeWeight: 2,
+		fillColor: '#FF0000',
+		fillOpacity: 0.35
+		});
+	roomShape.setMap(mapUH);
+}
+
+function geoFindMe() {
+  var output = document.getElementById("out");
+
+  if (!navigator.geolocation){
+    output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+    return;
+  }
+
+  function success(position) {
+    var latitude  = position.coords.latitude;
+    var longitude = position.coords.longitude;
+
+    output.innerHTML = '<p>Starting position was<br>Latitude: ' + latitude + '&#176N; <br>Longitude: ' + longitude + '&#176;W</p>';
+	
+	markerCurrent = new google.maps.Marker(
+		{
+		position: {lat: latitude, lng: longitude},
+		map: mapUH,
+		title: "Starting position: " + latitude + "N, " + longitude + "E"       
+	  }
+	);
+	
+	mapUH.panTo({lat: latitude, lng: longitude});
+  };
+
+  function error() {
+  output.innerHTML = "Unable to retrieve your location";
+  };
+
+  output.innerHTML = "<p>Locating ...</p>";
+
+  navigator.geolocation.getCurrentPosition(success, error);
+}
+
+function checkIn () {
+	if (google.maps.geometry.poly.containsLocation(markerCurrent.position,roomShape))
+		{window.alert("You're here! We'll check you in to B400");
+		var success = new Notification("Checked in to B400");}
+	else
+		{window.alert("Sorry, you're not here! We can't check you in to B400");
+		var fail = new Notification("Check in tried - but failed");}
+		
+
+}
+</script>
+
+</head>
+  <body onload="initmap()">
+	<div id="controls">
+		<button onclick="geoFindMe()">Show my location</button>
+		<button onclick="checkIn()">Check in</button>
+		<div id="out"></div>
+	</div>
+    <div id="map"></div>
+  </body>
+</html>
