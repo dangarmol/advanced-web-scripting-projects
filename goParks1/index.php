@@ -33,5 +33,16 @@
 	?>
 
 </table>
+
+<br>
+<form action="http://localhost/ADS/goParks1/parksFilter.php">
+	<select name="area">
+		<option value="*" selected="selected">All</option>
+		<option value="Hertsmere">Hertsmere</option>
+		<option value="Welwyn Hatfield">Welwyn Hatfield</option>
+	</select>
+	<input value="Search!" type="submit">
+</form>
+
 </body>
 </html>
