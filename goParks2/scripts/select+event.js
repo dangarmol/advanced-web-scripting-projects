@@ -22,16 +22,19 @@ function highlightParks (selectedArea) {
     if (parkArea == selectedArea) {
       console.log('match');
       row.style.backgroundColor = '#bce730';
-    } 
-	else {
-	  row.style.backgroundColor = null;	
-	}
-		
+    } else {
+      row.style.backgroundColor = null;	
+    }
   }
 }
 
-document.querySelector("input").onclick = 
-	function () {highlightParks(document.querySelector('select').selectedOptions[0].value);}
+document.querySelector("input").onclick = function () {
+  //highlightParks(document.querySelector('select').selectedOptions[0].value); //Changed for exercise 6.
+  return false;
+  //Why does it change even when this returns false? THE DOCUMENT DOESN'T REFRESH ON CHROME FOR SOME REASON!
+}
 
-
-		
+document.querySelector("select").onchange = function () {
+  //highlightParks(document.querySelector('select').selectedOptions[0].value);
+  return false;
+}
