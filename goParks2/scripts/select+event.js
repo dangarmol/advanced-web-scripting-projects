@@ -32,9 +32,10 @@ document.querySelector("input").onclick = function () {
   //highlightParks(document.querySelector('select').selectedOptions[0].value); //Changed for exercise 6.
   return false;
   //Why does it change even when this returns false? THE DOCUMENT DOESN'T REFRESH ON CHROME FOR SOME REASON!
+  //You need to commit changes to Git for them to appear on Chrome (?)
 }
 
 document.querySelector("select").onchange = function () {
-  //highlightParks(document.querySelector('select').selectedOptions[0].value);
-  return false;
+  highlightParks(document.querySelector('select').selectedOptions[0].value);
+  //return false;
 }
