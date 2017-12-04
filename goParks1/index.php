@@ -11,6 +11,7 @@
 	<tr>
 		<th>Park</th>
 		<th>Area</th>
+		<th>Atmosphere</th>
 	</tr>
 
 	<?php
@@ -18,17 +19,23 @@
 	$conn = new mysqli("localhost", "root", "", "goParks");
 
 	// Execute query
-	$q = 'select displayName, council from parks';
+	$q = 'select displayName, council, atmosphere from parks';
 	$result = mysqli_query($conn,$q);
 
 	// Output results in table rows
 	if ($result->num_rows > 0) {
 		// output data of each row
 		while($row = $result->fetch_assoc()) {
-			echo "<tr><td>".$row["displayName"]."</td><td>".$row["council"]."</td></tr>";
+			echo 	"<tr>
+						<td>".$row["displayName"]."</td>
+						<td>".$row["council"]."</td>
+						<td>".$row["atmosphere"]."</td>
+					</tr>";
 		}
 	} else {
-		echo "<tr><td>No parks found</td></tr>";
+		echo 	"<tr>
+					<td>No parks found</td>
+				</tr>";
 	}
 	?>
 

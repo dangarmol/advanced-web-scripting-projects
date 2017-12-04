@@ -27,19 +27,23 @@ array(
 	array(
 		'id' => 1, 
 		'name' => 'Oakmere Park', 
-		'region' => 'Hertsmere'),
+		'region' => 'Hertsmere',
+		'atmosphere' => 'Quiet'),
 	array(
 		'id' => 3, 
 		'name' => 'Bushey Rose Garden', 
-		'region' => 'Hertsmere'),
+		'region' => 'Hertsmere',
+		'atmosphere' => 'Nice and calm'),
 	array(
 		'id' => 2, 
 		'name' => 'Hazel Grove', 
-		'region' => 'Welwyn Hatfield'),
+		'region' => 'Welwyn Hatfield',
+		'atmosphere' => 'Noisy, children'),
 	array(
 		'id' => 4, 
 		'name' => 'Stanborough Park', 
-		'region' => 'Welwyn Hatfield'));
+		'region' => 'Welwyn Hatfield',
+		'atmosphere' => 'Relaxing'));
 
 
 ?>

@@ -19,12 +19,14 @@ $parks = get_parks_list();
 	<tr>
 		<th>Park</th>
 		<th>Area</th>
+		<th>Atmosphere</th>
 	</tr>
 
 	<?php foreach( $parks as $park ) { ?>
 		<tr>
 			<td><?php echo( $park['name'] ); ?></td>
 			<td><?= $park['region'] ?></td>
+			<td><?= $park['atmosphere'] ?></td>
 		</tr>
 	<?php } ?>
 
