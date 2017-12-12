@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>jQuery Ajax Post</title>
+
+<!-- import jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- jQuery code for Ajax request -->
+<script type="text/javascript">
+
+function setRating(park, stars) {
+  var rating = "I rate " + park + " " + stars + " stars";
+
+  $.ajax({
+  type: "POST",
+  url: "http://homepages.herts.ac.uk/~comqgrs/goParks/submitRating+CORS.php",
+  data: rating,
+  success: (function(data) {
+				console.log( "success" + data );
+				document.querySelector("#responseDisplay").innerHTML = "<h2>Response</h2>" + data; 
+			}),
+  dataType: "text"
+
+});
+
+ }
+
+</script>
+
+</head>
+<body>
+
+<h1>goParks </h1>
+<p>Lets go ... <a href="javascript:setRating('Hazel Grove', 5)">set a rating!</a></p>
+
+<div id="responseDisplay">
+</div>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,43 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>An Noughts and Crosses Example</title>
+  <style>
+	#c2 {background-color: lightgreen;}
+	#r2 {background-color: lightblue;}
+	td {font-size: 40pt ; height: 50pt; width: 50pt; text-align: center;}
+	td {border: solid black}
+  </style>
+ </head>
+<body>
+
+<h1>Selecting Rows and Columns</h1>
+<table>
+  <colgroup>
+    <col id="c1"> <col id="c2"> <col id="c3">
+  </colgroup>
+
+  <tr id="r1">
+    <td class="c1 r1 d1"></td>
+    <td class="c2 r1"></td>
+    <td class="c3 r1 d2"></td>
+  </tr>
+
+  <tr id="r2">
+    <td class="c1 r2 "></td>
+    <td class="c2 r2 d1 d2"></td>
+    <td class="c3 r2"></td>
+  </tr>
+
+  <tr id="r3">
+    <td class="c1 r3 d2"></td>
+    <td class="c2 r3"></td>
+    <td class="c3 r3 d1"></td>
+  </tr>
+</table>
+
+<script src = "game.js">
+</script>
+</body>
+</html>
+

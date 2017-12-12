@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>My Timetable via a Service</title>
+
+<script type="text/javascript">
+function getTimetable() {
+  // url will need to be relative to avoid cross domain block 
+  // deliberately can't access http://homepages.herts.ac.uk/~comqgrs/goParks/ unless file is hosted there
+  // will need to change service location, and/or make it relative
+  makeRequest('http://www.studynet1.herts.ac.uk/ptl/common/timetable.nsf/'); 
+ }
+
+function makeRequest(url) {
+	console.log("Making a request to ... " + url);
+    httpRequest = new XMLHttpRequest();
+
+    if (!httpRequest) {
+      console.log('Giving up :( Cannot create an XMLHTTP instance');
+      return false;
+    }
+    httpRequest.onreadystatechange = processContents;
+    httpRequest.open('GET', url);
+    httpRequest.send();
+}
+
+function processContents() {
+	console.log("Call back to process contents: state = " + httpRequest.readyState + "; status = " + httpRequest.status);
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+        // console.log("request returned, processing data ... \n" + httpRequest.responseText);
+		document.querySelector("#timetable").innerHTML = httpRequest.responseText;
+		timetable = document.querySelector("#timetable");
+		for (var slot of timetable.querySelectorAll('font[color="#000080"]')){
+			console.log(slot.innerHTML);
+		}  
+      } else {
+        console.log('There was a problem with the request.');
+      }
+    }
+  }
+;
+</script>
+
+<style>
+	#intro {display: none;}
+</style>
+
+</head>
+<body>
+
+<div id="intro">
+	<h1>myTimetable</h1>
+	<p>Lets go ... <a href="javascript:getTimetable()">display my timetable!</a></p>
+</div>
+
+<div id="timetable">
+</div>
+
+<script>
+getTimetable();
+</script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>Parks Listing with JSON via a Service</title>
+
+<style>
+	table {
+		}
+	th, td {
+		text-align: left;
+		padding-right: 20px;
+	}
+</style>
+
+<!-- import previously defined displayParks function -->
+<script type="text/javascript" src="displayParks.js"></script>
+
+<script type="text/javascript">
+var parksListJSON ;
+
+function getParksJSON() {
+  // url will need to be relative to avoid cross domain block 
+  // deliberately can't access http://homepages.herts.ac.uk/~comqgrs/goParks/ unless file is hosted there
+  // will need to change service location, and/or make it relative
+  makeRequest('http://homepages.herts.ac.uk/~comqgrs/goParks/parksJSON+CORS.php'); 
+ }
+
+function makeRequest(url) {
+	console.log("Making a request to ... " + url);
+    httpRequest = new XMLHttpRequest();
+
+    if (!httpRequest) {
+      console.log('Giving up :( Cannot create an XMLHTTP instance');
+      return false;
+    }
+    httpRequest.onreadystatechange = processContents;
+    httpRequest.open('GET', url);
+    httpRequest.send();
+}
+
+function processContents() {
+	console.log("Call back to process contents: state = " + httpRequest.readyState + "; status = " + httpRequest.status);
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+        console.log("request returned, processing data ... \n" + httpRequest.responseText);
+		parksListJSON = JSON.parse(httpRequest.responseText);
+		displayParks();
+  
+      } else {
+        console.log('There was a problem with the request.');
+      }
+    }
+  }
+;
+</script>
+
+</head>
+<body>
+
+<h1>goParks </h1>
+<p>Lets go ... <a href="javascript:getParksJSON()">display the parks!</a></p>
+
+<div id="parksList">
+</div>
+
+</body>
+</html>
+
+
+
