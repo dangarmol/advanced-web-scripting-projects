@@ -1,7 +1,7 @@
 <html>
 <head>
-<title>goParks</title>
-<link rel="stylesheet" type="text/css" href="style.css"> <!-- Specifies to use the CSS file -->
+	<title>goParks</title>
+	<link rel="stylesheet" type="text/css" href="style.css"> <!-- Specifies to use the CSS file -->
 </head>
 <body>
 <h1>goParks</h1>
