@@ -1,3 +1,8 @@
+<?php
+	require_once("studentLoader.php");
+	$student = get_add_students();
+?>
+
 <html>
 <head>
     <meta charset=UTF-8>
