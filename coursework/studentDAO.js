@@ -1,7 +1,13 @@
 //This is a Data Access Object to retrieve the student data from the database.
 
 function getFullStudentList() {
-    return module["students"];
+    var studentList = new Array();
+    var allStudents = module["students"];
+    for (var currentStudentID in allStudents) {
+        studentList.push(allStudents[currentStudentID]);
+        studentList[studentList.length - 1].srn = currentStudentID;
+    }
+    return studentList;
 }
 
 function getStudentListByGroup (groupID) {
@@ -9,7 +15,8 @@ function getStudentListByGroup (groupID) {
     var allStudents = module["students"];
     for (var currentStudentID in allStudents) {
 		if(allStudents[currentStudentID].allocatedGroup == groupID) {
-           studentList.push(allStudents[currentStudentID]); //This needs to include the Student ID as well!
+           studentList.push(allStudents[currentStudentID]);
+           studentList[studentList.length - 1].srn = currentStudentID;
         }
     }
     return studentList;

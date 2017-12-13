@@ -10,44 +10,18 @@
 
 	<p>Show 
 		<select id="selectedGroup">
-		<option value="all">All students</option>
+		<option selected="selected" value="all">All students</option>
 		<option value="690511">Group 1</option>
 		<option value="690513">Group 2</option>
 		</select>
 	</p>
 
-	<!-- <p>Lets go... <a href="javascript:displayStudents()">display the students!</a></p> <!-- Change this -->
+	<div id="studentTableDiv"> </div> <!-- Where the list of students or result will be shown -->
 
-	<div id="studentTable"> </div> <!-- Where the list of students or result will be shown -->
+	
 
 	<script type="text/javascript" src="studentViewTableCreator.js"></script>
 	<script type="text/javascript" src="studentDAO.js"></script>
 	<script type="text/javascript" src="studentListJSON_DB.js"></script>
-
-	<h3>Selected Students</h3>
-	<table>
-		<thead>
-			<tr>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>SRN</th>
-				<th>Allocated Group</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Jo 1</td>
-				<td>Bloggs</td>
-				<td>97xx08xx01</td>
-				<td>Group 1</td>
-			</tr>
-			<tr>
-				<td>Joe 3</td>
-				<td>Bliggs</td>
-				<td>97xx08xx04</td>
-				<td>Group 2</td>
-			</tr>
-		</tbody>
-	</table>
 </body>
 </html>
