@@ -8,12 +8,22 @@
 <body>
 	<h1>Student Groups for 6COM9051: More Web Scripting</h1>
 
-	<label for "selectedGroup">Show
-	<select id=selectedGroup>
-		<option>All students</option>
+	<p>Show 
+		<select id="selectedGroup">
+		<option value="all">All students</option>
 		<option value="690511">Group 1</option>
 		<option value="690513">Group 2</option>
-	</select>
+		</select>
+	</p>
+
+	<!-- <p>Lets go... <a href="javascript:displayStudents()">display the students!</a></p> <!-- Change this -->
+
+	<div id="studentTable"> </div> <!-- Where the list of students or result will be shown -->
+
+	<script type="text/javascript" src="studentViewTableCreator.js"></script>
+	<script type="text/javascript" src="studentDAO.js"></script>
+	<script type="text/javascript" src="studentListJSON_DB.js"></script>
+
 	<h3>Selected Students</h3>
 	<table>
 		<thead>
