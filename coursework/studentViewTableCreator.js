@@ -49,13 +49,5 @@ function drawHTMLStudentTable (groupID) {
         studentTableHTML += "<h3>There are no students to display</h3>"; //Add bootstrap format here.
     }
     
-    document.getElementById("studentTableDiv").innerHTML = studentTableHTML;
+    return studentTableHTML;
 }
-
-document.getElementById("selectedGroup").onchange = function () {
-    drawHTMLStudentTable(document.getElementById("selectedGroup").selectedOptions[0].value);
-}
-
-window.onload = function() { //On load, displays all of the elements.
-    drawHTMLStudentTable("all");
-};
