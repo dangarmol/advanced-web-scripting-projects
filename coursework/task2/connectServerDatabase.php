@@ -11,4 +11,6 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
+
+    //THIS IS NOT NEEDED FOR NOW BUT MIGHT BE IMPLEMENTED IN THE FUTURE
 ?>

@@ -1,6 +1,5 @@
 <?php
-	require_once("connectServerDatabase.php");
-	$student = get_all_students();
+	require_once("studentDAO.php");
 ?>
 
 <html>
@@ -13,61 +12,20 @@
 <body>
 	<h1>Student Groups for 6COM9051: More Web Scripting</h1>
 
-	<label for "selectedGroup">Show
-	<select id=selectedGroup>
-		<option>All students</option>
-		<option value="690511">Group 1</option>
-		<option value="690513">Group 2</option>
-	</select>
-	<h3>Selected Students</h3>
-	<table>
-		<thead>
-			<tr>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>SRN</th>
-				<th>Allocated Group</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Jo 1</td>
-				<td>Bloggs</td>
-				<td>97xx08xx01</td>
-				<td>Group 1</td>
-			</tr>
-			<tr>
-				<td>Joe 3</td>
-				<td>Bliggs</td>
-				<td>97xx08xx04</td>
-				<td>Group 2</td>
-			</tr>
-		</tbody>
+	<h3>Write the level and module you want to get the student list from:</h3>
+	<p>Fill the blanks so it is in the format "XcomYYYY"</p>
 
-		<?php
-			// Create connection
-			$conn = new mysqli("localhost", "root", "", "goParks");
+	<form action="getInfo.php">
+		<input style="width:15px;" type="text" name="level" maxlength="1"/>
+		<span>com</span>
+		<input style="width:40px;" type="text" name="code" maxlength="4"/> <!-- Add this feature to comment -->
 
-			// Execute query
-			$q = 'select displayName, council, atmosphere from parks';
-			$result = mysqli_query($conn,$q);
+		<button input class="searchFieldALign" type=submit>Go!</button>
+	</form>
 
-			// Output results in table rows
-			if ($result->num_rows > 0) {
-				// output data of each row
-				while($row = $result->fetch_assoc()) {
-					echo 	"<tr>
-								<td>".$row["displayName"]."</td>
-								<td>".$row["council"]."</td>
-								<td>".$row["atmosphere"]."</td>
-							</tr>";
-				}
-			} else {
-				echo 	"<tr>
-							<td>No parks found</td>
-						</tr>";
-			}
-		?>
-	</table>
+	<?php
+		$jsonData = get_students_from_group("6com1234");
+		console_log($jsonData);
+	?>
 </body>
 </html>
