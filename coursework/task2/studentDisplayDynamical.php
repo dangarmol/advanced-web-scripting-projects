@@ -1,6 +1,6 @@
 <?php
-	require_once("studentLoader.php");
-	$student = get_add_students();
+	require_once("connectServerDatabase.php");
+	$student = get_all_students();
 ?>
 
 <html>
