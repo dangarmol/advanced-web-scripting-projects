@@ -1,9 +1,13 @@
 function drawHTMLStudentTable (groupID) {
     var studentList;
-    if(groupID == "all")
-        studentList = getFullStudentList();
-    else
-        studentList = getStudentListByGroup(groupID);
+    if(origin == "json") {
+        if(groupID == "all")
+            studentList = getFullStudentList();
+        else
+            studentList = getStudentListByGroup(groupID);
+    } else if(origin == "service") {
+        studentList = getServiceStudentList();
+    }
     
     var studentTableHTML = "";
 
@@ -30,7 +34,7 @@ function drawHTMLStudentTable (groupID) {
             else if(currentStudent.allocatedGroup == "690513")
                 groupName = "Group 2";
             else
-                groupName = "ERROR";
+                groupName = currentStudent.allocatedGroup;
 
             var studentRowString = "<tr> <td>";
             studentRowString += currentStudent.firstName;

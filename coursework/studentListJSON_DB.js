@@ -23,4 +23,4 @@ var module =
 			"members": ["97xx08xx04", "97xx08xx02", "97xx08xx06"]
 		}
 	}
-}
+};

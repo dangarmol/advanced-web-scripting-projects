@@ -2,7 +2,7 @@
 
 function getFullStudentList() {
     var studentList = new Array();
-    var allStudents = module["students"];
+    var allStudents = moduleStudentList["students"];
     for (var currentStudentID in allStudents) {
         studentList.push(allStudents[currentStudentID]);
         studentList[studentList.length - 1].srn = currentStudentID;
@@ -12,7 +12,7 @@ function getFullStudentList() {
 
 function getStudentListByGroup (groupID) {
     var studentList = new Array();
-    var allStudents = module["students"];
+    var allStudents = moduleStudentList["students"];
     for (var currentStudentID in allStudents) {
 		if(allStudents[currentStudentID].allocatedGroup == groupID) {
            studentList.push(allStudents[currentStudentID]);

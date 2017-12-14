@@ -20,7 +20,19 @@
 
 	<script type="text/javascript" src="studentViewTableCreator.js"></script>
 	<script type="text/javascript" src="studentViewTableSetter.js"></script>
-	<script type="text/javascript" src="studentDAO.js"></script>
+	<script type="text/javascript" src="studentListDAO.js"></script>
 	<script type="text/javascript" src="studentListJSON_DB.js"></script>
+	<script type="text/javascript" src="studentListTransfer.js"></script>
+	<script type="text/javascript"> //Sets the action listeners for this window.
+		document.getElementById("selectedGroup").onchange = function () {
+			setHTMLStudentTable(document.getElementById("selectedGroup").selectedOptions[0].value);
+		}
+		
+		window.onload = function() { //On load, displays all of the elements.
+			moduleStudentList = module;
+			origin = "json";
+			setHTMLStudentTable("all");
+		};
+	</script>
 </body>
 </html>
