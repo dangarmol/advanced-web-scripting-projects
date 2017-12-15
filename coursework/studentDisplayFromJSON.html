@@ -10,16 +10,14 @@
 
 	<p>Show 
 		<select id="selectedGroup">
-		<option selected="selected" value="all">All students</option>
-		<option value="690511">Group 1</option>
-		<option value="690513">Group 2</option>
+			<option value="all">All students</option>
 		</select>
 	</p>
 
 	<div id="studentTableDiv"> </div> <!-- Where the list of students or result will be shown -->
 
-	<script type="text/javascript" src="studentViewTableCreator.js"></script>
-	<script type="text/javascript" src="studentViewTableSetter.js"></script>
+	<script type="text/javascript" src="studentViewFactory.js"></script>
+	<script type="text/javascript" src="studentViewManager.js"></script>
 	<script type="text/javascript" src="studentListDAO.js"></script>
 	<script type="text/javascript" src="studentListJSON_DB.js"></script>
 	<script type="text/javascript" src="studentListTransfer.js"></script>
@@ -32,6 +30,7 @@
 			moduleStudentList = module;
 			origin = "json";
 			setHTMLStudentTable("all");
+			setDropdownList();
 		};
 	</script>
 </body>

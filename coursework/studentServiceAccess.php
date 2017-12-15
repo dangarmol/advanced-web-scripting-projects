@@ -12,12 +12,6 @@
 
 		return $json;
 	}
-
-	function console_log( $data ){
-		echo '<script>';
-		echo 'console.log('. json_encode( $data ) .')';
-		echo '</script>';
-	}
 ?>
 
 <html>
@@ -28,11 +22,12 @@
 </head>
 
 <body>
+	<a href="studentDisplayDynamical.php">Go back!</a> <!-- Why does this not work properly? -->
 	<div id="studentTableDiv"> </div> <!-- Where the list of students or result will be shown -->
 
-	<script type="text/javascript" src="studentViewTableCreator.js"></script>
+	<script type="text/javascript" src="studentViewFactory.js"></script>
 	<script type="text/javascript" src="studentListTransfer.js"></script>
-	<script type="text/javascript" src="studentViewTableSetter.js"></script>
+	<script type="text/javascript" src="studentViewManager.js"></script>
 	<script type="text/javascript">
 		window.onload = function() {
 			moduleStudentList = JSON.parse(<?php echo json_encode(get_students_from_group()) ;?>);

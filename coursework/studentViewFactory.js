@@ -1,4 +1,4 @@
-function drawHTMLStudentTable (groupID) {
+function createHTMLStudentTable (groupID) {
     var studentList;
     if(origin == "json") {
         if(groupID == "all")
@@ -29,13 +29,6 @@ function drawHTMLStudentTable (groupID) {
             var currentStudent = studentList[i];
             var groupName;
 
-            if(currentStudent.allocatedGroup == "690511")
-                groupName = "Group 1";
-            else if(currentStudent.allocatedGroup == "690513")
-                groupName = "Group 2";
-            else
-                groupName = currentStudent.allocatedGroup;
-
             var studentRowString = "<tr> <td>";
             studentRowString += currentStudent.firstName;
             studentRowString += "</td> <td>";
@@ -43,7 +36,7 @@ function drawHTMLStudentTable (groupID) {
             studentRowString += "</td> <td>";
             studentRowString += currentStudent.srn;
             studentRowString += "</td> <td>";
-            studentRowString += groupName;
+            studentRowString += getGroupName(currentStudent.allocatedGroup);
             studentRowString += "</td> </tr>";
             studentTableHTML += studentRowString;
         }
@@ -54,4 +47,24 @@ function drawHTMLStudentTable (groupID) {
     }
     
     return studentTableHTML;
+}
+
+function createDropdownList() {
+    var dropdownListHTML = "<option value=all>All students</option>"; //Check if this is right
+
+    var groupList = getFullGroupList();
+
+    if(groupList.length > 0) {
+        for(var i = 0; i < groupList.length; i++) {
+            var dropdownElement = "<option value=";
+            dropdownElement += groupList[i].groupID;
+            dropdownElement += ">";
+            dropdownElement += groupList[i].name;
+            dropdownElement += "</option>";
+            dropdownListHTML += dropdownElement;
+        } 
+    } else {
+        studentTableHTML += "<h3>There are no groups to display in the dropdown list!</h3>"; //Add bootstrap format here.
+    }
+    return dropdownListHTML;
 }

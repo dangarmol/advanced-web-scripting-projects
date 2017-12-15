@@ -21,3 +21,13 @@ function getStudentListByGroup (groupID) {
     }
     return studentList;
 }
+
+function getFullGroupList() {
+    var groupList = new Array();
+    var allGroups = moduleStudentList["groups"];
+    for (var currentGroupID in allGroups) {
+        groupList.push(allGroups[currentGroupID]);
+        groupList[groupList.length - 1].groupID = currentGroupID;
+    }
+    return groupList;
+}
