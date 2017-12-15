@@ -1,7 +1,3 @@
-<?php
-	require_once("studentServiceAccess.php");
-?>
-
 <html>
 <head>
     <meta charset=UTF-8>
@@ -19,7 +15,7 @@
 		<input style="width:15px;" type="text" name="levelInput" maxlength="1"/>
 		<span>com</span>
 		<input style="width:40px;" type="text" name="codeInput" maxlength="4"/> <!-- Add this feature to report -->
-
+		<!-- Check that the format of the numbers is correct! -->
 		<button input type=submit>Go!</button>
 	</form>
 </body>

@@ -17,7 +17,7 @@ function createHTMLStudentTable (groupID) {
             studentTableHTML += "all students:</h3>";
         } else {
             studentTableHTML += "students from group ";
-            studentTableHTML += groupID;
+            studentTableHTML += getGroupName(groupID);
             studentTableHTML += ":</h3>";
         }
 
@@ -50,7 +50,7 @@ function createHTMLStudentTable (groupID) {
 }
 
 function createDropdownList() {
-    var dropdownListHTML = "<option value=all>All students</option>"; //Check if this is right
+    var dropdownListHTML = "<option value=all>All students</option>";
 
     var groupList = getFullGroupList();
 

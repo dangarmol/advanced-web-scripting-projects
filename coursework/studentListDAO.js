@@ -2,7 +2,7 @@
 
 function getFullStudentList() {
     var studentList = new Array();
-    var allStudents = moduleStudentList["students"];
+    var allStudents = moduleInfo["students"];
     for (var currentStudentID in allStudents) {
         studentList.push(allStudents[currentStudentID]);
         studentList[studentList.length - 1].srn = currentStudentID;
@@ -12,7 +12,7 @@ function getFullStudentList() {
 
 function getStudentListByGroup (groupID) {
     var studentList = new Array();
-    var allStudents = moduleStudentList["students"];
+    var allStudents = moduleInfo["students"];
     for (var currentStudentID in allStudents) {
 		if(allStudents[currentStudentID].allocatedGroup == groupID) {
            studentList.push(allStudents[currentStudentID]);
@@ -24,7 +24,7 @@ function getStudentListByGroup (groupID) {
 
 function getFullGroupList() {
     var groupList = new Array();
-    var allGroups = moduleStudentList["groups"];
+    var allGroups = moduleInfo["groups"];
     for (var currentGroupID in allGroups) {
         groupList.push(allGroups[currentGroupID]);
         groupList[groupList.length - 1].groupID = currentGroupID;

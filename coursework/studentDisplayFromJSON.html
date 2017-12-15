@@ -10,7 +10,7 @@
 
 	<p>Show 
 		<select id="selectedGroup">
-			<option value="all">All students</option>
+			<option value=all>All students</option>
 		</select>
 	</p>
 
@@ -21,13 +21,13 @@
 	<script type="text/javascript" src="studentListDAO.js"></script>
 	<script type="text/javascript" src="studentListJSON_DB.js"></script>
 	<script type="text/javascript" src="studentListTransfer.js"></script>
-	<script type="text/javascript"> //Sets the action listeners for this window.
+	<script type="text/javascript"> 
 		document.getElementById("selectedGroup").onchange = function () {
 			setHTMLStudentTable(document.getElementById("selectedGroup").selectedOptions[0].value);
-		}
+		} //Sets the action listener for the dropdown list.
 		
-		window.onload = function() { //On load, displays all of the elements.
-			moduleStudentList = module;
+		window.onload = function() { //On load, displays all the elements.
+			moduleInfo = module;
 			origin = "json";
 			setHTMLStudentTable("all");
 			setDropdownList();
