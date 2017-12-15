@@ -1,17 +1,12 @@
+/**
+ * 
+ * @param {*} groupID 
+ */
 function createHTMLStudentTable (groupID) {
-    var studentList;
-    if(origin == "json") {
-        if(groupID == "all")
-            studentList = getFullStudentList();
-        else
-            studentList = getStudentListByGroup(groupID);
-    } else if(origin == "service") {
-        studentList = getServiceStudentList();
-    }
-    
+    var selectedStudents = getStudentListByGroup(groupID);
     var studentTableHTML = "";
 
-    if(studentList.length > 0) {
+    if(selectedStudents.length > 0) {
         studentTableHTML += "<h3>List of ";
         if(groupID == "all") {
             studentTableHTML += "all students:</h3>";
@@ -25,9 +20,9 @@ function createHTMLStudentTable (groupID) {
         studentTableHTML += "<th>First Name</th> <th>Last Name</th> <th>SRN</th> <th>Allocated Group</th>";
         studentTableHTML += "</tr> </thead> <tbody>";
 
-        for(var i = 0; i < studentList.length; i++) {
-            var currentStudent = studentList[i];
-            var groupName;
+
+        for(var i = 0; i < selectedStudents.length; i++) {
+            var currentStudent = selectedStudents[i];
 
             var studentRowString = "<tr> <td>";
             studentRowString += currentStudent.firstName;
@@ -49,7 +44,10 @@ function createHTMLStudentTable (groupID) {
     return studentTableHTML;
 }
 
-function createDropdownList() {
+/**
+ * 
+ */
+function createGroupSelectionDropdownList() {
     var dropdownListHTML = "<option value=all>All students</option>";
 
     var groupList = getFullGroupList();

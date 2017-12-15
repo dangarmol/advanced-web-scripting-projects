@@ -10,7 +10,7 @@
 
 	<p>Show 
 		<select id="selectedGroup">
-			<option value=all>All students</option>
+			<option value=all>All students</option> <!-- For it not to blink empty while loading -->
 		</select>
 	</p>
 
@@ -22,17 +22,18 @@
 	<script type="text/javascript" src="JSON_Database.js"></script>
 	<script type="text/javascript" src="studentTransfer.js"></script>
 	<script type="text/javascript" src="groupApplicationService.js"></script>
+	<script type="text/javascript" src="studentApplicationService.js"></script>
 
 	<script type="text/javascript"> 
 		document.getElementById("selectedGroup").onchange = function () {
 			setHTMLStudentTable(document.getElementById("selectedGroup").selectedOptions[0].value);
 		} //Sets the action listener for the dropdown list.
 		
-		window.onload = function() { //On load, displays all the elements.
-			moduleInfo = module;
+		window.onload = function() { //On load, displays all the necessary elements.
 			origin = "json";
+			loadAllInfo(null);
 			setHTMLStudentTable("all");
-			setDropdownList();
+			setGroupSelectionDropdownList();
 		};
 	</script>
 </body>

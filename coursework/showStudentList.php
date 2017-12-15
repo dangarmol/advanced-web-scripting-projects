@@ -39,13 +39,16 @@
 	</div>
 	<div id="studentTableDiv"></div> <!-- Where the list of students or result will be shown -->
 
-	<script type="text/javascript" src="studentViewFactory.js"></script>
-	<script type="text/javascript" src="studentListTransfer.js"></script>
-	<script type="text/javascript" src="studentViewManager.js"></script>
+	<script type="text/javascript" src="viewFactory.js"></script>
+	<script type="text/javascript" src="viewManager.js"></script>
+	<script type="text/javascript" src="studentTransfer.js"></script>
+	<script type="text/javascript" src="groupTransfer.js"></script>
+	<script type="text/javascript" src="moduleTransfer.js"></script>
+	<script type="text/javascript" src="moduleDAO.js"></script>
 	<script type="text/javascript">
 		window.onload = function() {
-			moduleInfo = JSON.parse(<?php echo json_encode(get_students_from_group()) ;?>);
 			origin = "service";
+			loadAllInfo(JSON.parse(<?php echo json_encode(get_students_from_group()) ;?>)); 
 			setHTMLStudentTable("all");
 		};
 

@@ -1,5 +1,3 @@
-//Transfer Object for the student list
+//Transfer object for the current students information
 
-var origin;
 var moduleStudentList;
-var originalStudentList; //Only used for the sort function, to return to the original view.
