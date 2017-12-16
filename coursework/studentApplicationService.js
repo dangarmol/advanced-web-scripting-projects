@@ -27,32 +27,29 @@ function getStudentListByGroup (groupID) {
 /**
  * Returns a student array sorted by what the parameter dictates.
  * @param {*} sortBy The parameter must be one of the following:
- *                   {none, srn, fname, lname, gname}
+ *                   {srn, fname, lname, gname}
  */
-function getSortedStudentList(sortBy) {
-    /*var list = {"you": 100, "me": 75, "foo": 116, "bar": 15};
-    keysSorted = Object.keys(list).sort(function(a,b){return list[a]-list[b]}) */
-    //keysSorted is an array, not an object!
-    var sortedStudents = new Array();
-    if(originalStudentList == null) {
-        originalStudentList = moduleStudentList; //Makes a copy of the original
-    }
+function sortStudentList(sortBy) {
     switch(sortBy) {
-        case "none":
-            moduleStudentList = originalStudentList;
-            break;
         case "srn":
-        
+            moduleStudentList.sort(function(a,b) {
+                return (a.srn > b.srn) ? 1 : ((b.srn > a.srn) ? -1 : 0);
+            } );
             break;
         case "fname":
-
+            moduleStudentList.sort(function(a,b) {
+                return (a.firstName > b.firstName) ? 1 : ((b.firstName > a.firstName) ? -1 : 0);
+            } );
             break;
         case "lname":
-
+            moduleStudentList.sort(function(a,b) {
+                return (a.lastName > b.lastName) ? 1 : ((b.lastName > a.lastName) ? -1 : 0);
+            } );
             break;
-        case "gname":
-
+        case "gname": //TODO Comment that the alphabetical order might not work as desired.
+            moduleStudentList.sort(function(a,b) {
+                return (getGroupName(a.allocatedGroup) > getGroupName(b.allocatedGroup)) ? 1 : ((getGroupName(b.allocatedGroup) > getGroupName(a.allocatedGroup)) ? -1 : 0);
+            } );
             break;
     }
-    return sortedStudents;
 }

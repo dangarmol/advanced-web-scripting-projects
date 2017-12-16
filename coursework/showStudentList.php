@@ -1,7 +1,7 @@
 <?php
 	function get_students_from_group() {
-		$levelInput = "Error";
-		$codeInput = "Error"; //TODO Throw exceptions.
+		$levelInput = "ERROR";
+		$codeInput = "ERROR"; //TODO Throw exceptions.
 
 		if (isset($_GET['levelInput'])) $levelInput=$_GET['levelInput'];
 		if (isset($_GET['codeInput'])) $codeInput=$_GET['codeInput'];
@@ -24,18 +24,19 @@
 <body>
 	<div id="backButton">
 		<h2>
-			<a href=studentDisplayDynamical.php>&lt-- Go back!</a>
+			<a href=studentDisplayFromService.php>&lt-- Go back!</a>
 		</h2>
 	</div>
 	<div id="sortByDropdownDiv">
 		<p>Sort by... <select id=sortByDropdown>
-			<option value=none>None</option>
 			<option value=srn>Student Registration Number</option>
 			<option value=fname>First name</option>
 			<option value=lname>Last name</option>
 			<option value=gname>Group Name</option>
 		</select>
+		<button id=sortButton>Sort!</button>
 		</p>
+		
 	</div>
 	<div id="studentTableDiv"></div> <!-- Where the list of students or result will be shown -->
 
@@ -44,6 +45,8 @@
 	<script type="text/javascript" src="studentTransfer.js"></script>
 	<script type="text/javascript" src="groupTransfer.js"></script>
 	<script type="text/javascript" src="moduleTransfer.js"></script>
+	<script type="text/javascript" src="studentApplicationService.js"></script>
+	<script type="text/javascript" src="groupApplicationService.js"></script>
 	<script type="text/javascript" src="moduleDAO.js"></script>
 	<script type="text/javascript">
 		window.onload = function() {
@@ -52,8 +55,8 @@
 			setHTMLStudentTable("all");
 		};
 
-		document.getElementById("sortByDropdown").onchange = function () {
-			sortedStudentList = getSortedStudentList(document.getElementById("sortByDropdown").selectedOptions[0].value);
+		document.getElementById("sortButton").onclick = function () {
+			sortStudentList(document.getElementById("sortByDropdown").selectedOptions[0].value);
 			setHTMLStudentTable("all"); //For the table to refresh
 		} //Sets the action listener for the dropdown list.
 	</script>
