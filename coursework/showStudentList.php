@@ -51,8 +51,15 @@
 	<script type="text/javascript">
 		window.onload = function() {
 			origin = "service";
-			loadAllInfo(JSON.parse(<?php echo json_encode(get_students_from_group()) ;?>)); 
-			setHTMLStudentTable("all");
+			try{
+				loadAllInfo(<?php echo get_students_from_group();?>);
+				//TODO This needs to be fixed for the cases where the format entered is not correct!
+			} catch (exception) {
+				alert("Invalid data entered, please try again.");
+				window.location.href = "studentDisplayFromService.php";
+			} finally {
+				setHTMLStudentTable("all");
+			}
 		};
 
 		document.getElementById("sortButton").onclick = function () {

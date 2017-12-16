@@ -15,8 +15,7 @@
 		<input style="width:15px;" type="text" name="levelInput" maxlength="1"/>
 		<span>com</span>
 		<input style="width:40px;" type="text" name="codeInput" maxlength="4"/>
-		<!-- Check that the format of the numbers is correct! -->
-		<button input type=submit>Go!</button>
+		<button input type=submit id=moduleButton>Go!</button>
 	</form>
 </body>
 </html>
