@@ -41,12 +41,24 @@
 
 	<div id="modifyStudentDiv">
 		<p>Change student
-			<input type="text" style="width:65px;" placeholder="SRN" id="studentSRNInput"/>
+			<select id=selectStudentFromList>
+				<option value=*>Loading student list...</option>
+			</select>
+			to group
 			<select id=selectGroupFromList>
-				<option value=srn>Student Registration Number</option>
+				<option value=*>Loading group list...</option>
 			</select>
 			<button id=sortButton>Change group</button>
 		</p>
+	</div>
+
+	<div id="toggleChanges">
+		<button id=toggleChanges>Toggle new/old groups</button>
+		<!-- TODO Change colour for groups that have been modified -->
+	</div>
+
+	<div id="uploadChanges">
+		<button id=uploadButton>Check and upload data</button>
 	</div>
 
 	<div id="studentTableDiv"></div> <!-- Where the list of students or result will be shown -->
@@ -73,6 +85,8 @@
 			} */
 			loadAllInfo(<?php echo get_students_from_group();?>);
 			setHTMLStudentTable("all");
+			setGroupListDropdown();
+			setStudentListDropdown();
 		};
 
 		document.getElementById("sortButton").onclick = function () {

@@ -61,7 +61,53 @@ function createGroupSelectionDropdownList() {
             dropdownListHTML += dropdownElement;
         } 
     } else {
-        studentTableHTML += "<h3>There are no groups to display in the dropdown list!</h3>"; //Add bootstrap format here.
+        dropdownListHTML += "<h3>There are no groups to display in the dropdown list!</h3>"; //Add bootstrap format here.
+    }
+    return dropdownListHTML;
+}
+
+/**
+ * 
+ */
+function createGroupListDropdown() {
+    var dropdownListHTML = "";
+
+    var groupList = getFullGroupList();
+
+    if(groupList.length > 0) {
+        for(var i = 0; i < groupList.length; i++) {
+            var dropdownElement = "<option value=";
+            dropdownElement += groupList[i].groupID;
+            dropdownElement += ">";
+            dropdownElement += groupList[i].name;
+            dropdownElement += "</option>";
+            dropdownListHTML += dropdownElement;
+        } 
+    } else {
+        dropdownListHTML += "<h3>There are no groups to display in the dropdown list!</h3>"; //Add bootstrap format here.
+    }
+    return dropdownListHTML;
+}
+
+/**
+ * 
+ */
+function createStudentListDropdown() {
+    var dropdownListHTML = "";
+
+    var studentList = getFullStudentList();
+
+    if(studentList.length > 0) {
+        for(var i = 0; i < studentList.length; i++) {
+            var dropdownElement = "<option value=";
+            dropdownElement += studentList[i].srn;
+            dropdownElement += ">";
+            dropdownElement += studentList[i].srn;
+            dropdownElement += "</option>";
+            dropdownListHTML += dropdownElement;
+        } 
+    } else {
+        dropdownListHTML += "<h3>There are no groups to display in the dropdown list!</h3>"; //Add bootstrap format here.
     }
     return dropdownListHTML;
 }
