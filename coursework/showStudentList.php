@@ -1,16 +1,16 @@
 <?php
 	function get_students_from_group() {
 		$levelInput = "ERROR";
-		$codeInput = "ERROR"; //TODO Throw exceptions.
+		$codeInput = "ERROR"; //TODO Check variable contents before calling the function.
 
 		if (isset($_GET['levelInput'])) $levelInput=$_GET['levelInput'];
 		if (isset($_GET['codeInput'])) $codeInput=$_GET['codeInput'];
 
 		$url = "http://homepages.herts.ac.uk/%7Ecomqgrs/ads/moduleGroups.php?moduleCode=";
 		$fullURL = $url.$levelInput."com".$codeInput; //Concatenates strings together
-		$json = file_get_contents($fullURL);
+		$jsonOutput = file_get_contents($fullURL);
 
-		return $json;
+		return $jsonOutput;
 	}
 ?>
 
@@ -27,6 +27,7 @@
 			<a href=studentDisplayFromService.php>&lt-- Go back!</a>
 		</h2>
 	</div>
+
 	<div id="sortByDropdownDiv">
 		<p>Sort by... <select id=sortByDropdown>
 			<option value=srn>Student Registration Number</option>
@@ -34,10 +35,20 @@
 			<option value=lname>Last name</option>
 			<option value=gname>Group Name</option>
 		</select>
-		<button id=sortButton>Sort!</button>
+		<button id=sortButton>Sort students</button>
 		</p>
-		
 	</div>
+
+	<div id="modifyStudentDiv">
+		<p>Change student
+			<input type="text" style="width:65px;" placeholder="SRN" id="studentSRNInput"/>
+			<select id=selectGroupFromList>
+				<option value=srn>Student Registration Number</option>
+			</select>
+			<button id=sortButton>Change group</button>
+		</p>
+	</div>
+
 	<div id="studentTableDiv"></div> <!-- Where the list of students or result will be shown -->
 
 	<script type="text/javascript" src="viewFactory.js"></script>
@@ -51,15 +62,17 @@
 	<script type="text/javascript">
 		window.onload = function() {
 			origin = "service";
-			try{
-				loadAllInfo(<?php echo get_students_from_group();?>);
+			/* try{
+				loadAllInfo(...);
 				//TODO This needs to be fixed for the cases where the format entered is not correct!
 			} catch (exception) {
 				alert("Invalid data entered, please try again.");
 				window.location.href = "studentDisplayFromService.php";
 			} finally {
 				setHTMLStudentTable("all");
-			}
+			} */
+			loadAllInfo(<?php echo get_students_from_group();?>);
+			setHTMLStudentTable("all");
 		};
 
 		document.getElementById("sortButton").onclick = function () {

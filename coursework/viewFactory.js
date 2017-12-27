@@ -20,7 +20,6 @@ function createHTMLStudentTable (groupID) {
         studentTableHTML += "<th>First Name</th> <th>Last Name</th> <th>SRN</th> <th>Allocated Group</th>";
         studentTableHTML += "</tr> </thead> <tbody>";
 
-
         for(var i = 0; i < selectedStudents.length; i++) {
             var currentStudent = selectedStudents[i];
 
