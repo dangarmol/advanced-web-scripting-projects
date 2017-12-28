@@ -9,12 +9,17 @@ function createHTMLStudentTable (groupID) {
     if(selectedStudents.length > 0) {
         studentTableHTML += "<h3>List of ";
         if(groupID == "all") {
-            studentTableHTML += "all students:</h3>";
+            studentTableHTML += "all students";
         } else {
-            studentTableHTML += "students from group ";
+            studentTableHTML += "students from group &quot";
             studentTableHTML += getGroupName(groupID);
-            studentTableHTML += ":</h3>";
+            studentTableHTML += "&quot";
         }
+        studentTableHTML += " in the module &quot";
+        studentTableHTML += moduleName;
+        studentTableHTML += " (";
+        studentTableHTML += moduleCode;
+        studentTableHTML += ")&quot:</h3>";
 
         studentTableHTML += "<table> <thead> <tr>";
         studentTableHTML += "<th>First Name</th> <th>Last Name</th> <th>SRN</th> <th>Allocated Group</th>";
@@ -29,8 +34,19 @@ function createHTMLStudentTable (groupID) {
             studentRowString += currentStudent.lastName;
             studentRowString += "</td> <td>";
             studentRowString += currentStudent.srn;
-            studentRowString += "</td> <td>";
-            studentRowString += getGroupName(currentStudent.allocatedGroup);
+            studentRowString += "</td>";
+            if(getOldGroup(currentStudent.srn) != null) {
+                if(currentToggle == "new") {
+                    studentRowString += "<td class=new-group>";
+                    studentRowString += getGroupName(currentStudent.allocatedGroup);
+                } else {
+                    studentRowString += "<td class=old-group>";
+                    studentRowString += getGroupName(getOldGroup(currentStudent.srn));
+                }
+            } else {
+                studentRowString += "<td>";
+                studentRowString += getGroupName(currentStudent.allocatedGroup);
+            }
             studentRowString += "</td> </tr>";
             studentTableHTML += studentRowString;
         }
@@ -46,7 +62,7 @@ function createHTMLStudentTable (groupID) {
 /**
  * 
  */
-function createGroupSelectionDropdownList() {
+function createGroupFilterDropdown() {
     var dropdownListHTML = "<option value=all>All students</option>";
 
     var groupList = getFullGroupList();
@@ -95,7 +111,7 @@ function createGroupListDropdown() {
 function createStudentListDropdown(groupID) {
     var dropdownListHTML = "";
     var studentList;
-    
+
     if(groupID == "all") {
         studentList = getFullStudentList();
     } else {
@@ -118,7 +134,11 @@ function createStudentListDropdown(groupID) {
 }
 
 function createHTMLStudentTableError() {
-    studentTableHTML = "<h3>The module code or level is incorrent. Click <a href=studentDisplayFromService.php>here</a> to go back to the module selection.</h3>"; //Add bootstrap format here.
-    
-    return studentTableHTML;
+    var studentTableHTMLError = "<h3>The module code or level is incorrent. Click <a href=studentDisplayFromService.php>here</a> to go back to the module selection.</h3>"; //Add bootstrap format here.
+    return studentTableHTMLError;
+}
+
+function createModifiedMessage() {
+    var modifiedStudentsMessage = "<p>One or more of the students have been moved to a different group.<br>Their new group appears in green, to check their original groups, click on the Toggle button and they will appear in yellow.<br>To check that no group is empty and upload the groups, click on the other button.</p>";
+    return modifiedStudentsMessage;
 }

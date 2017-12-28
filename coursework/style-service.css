@@ -1,0 +1,28 @@
+h1 {
+    background-color: black;
+    color: red;
+}
+
+table, th, td {
+    padding: 0.25em 0.5em;
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    background-color: green;
+    color: white;
+}
+
+.new-group {
+    background-color: rgb(139, 233, 139);
+    color: green;
+}
+
+.old-group {
+    background-color: rgb(255, 193, 193);
+    color: rgb(255, 0, 0);
+}

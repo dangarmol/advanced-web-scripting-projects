@@ -46,10 +46,22 @@ function sortStudentList(sortBy) {
                 return (a.lastName > b.lastName) ? 1 : ((b.lastName > a.lastName) ? -1 : 0);
             } );
             break;
-        case "gname": //TODO Comment that the alphabetical order might not work as desired.
+        case "gname": //TODO Comment that the alphabetical order might not work as desired because of 1 and 10.
             moduleStudentList.sort(function(a,b) {
                 return (getGroupName(a.allocatedGroup) > getGroupName(b.allocatedGroup)) ? 1 : ((getGroupName(b.allocatedGroup) > getGroupName(a.allocatedGroup)) ? -1 : 0);
             } );
             break;
+        default:
+        throw new exception("Wrong parameter in the sorting function. This should never be reached.");
     }
+}
+
+function changeStudentGroup(selectedStudentSRN, newGroupID) {
+    if(getOldGroup(selectedStudentSRN) == null) { //The student has never changed groups.
+        /*The student needs a new entry in the studentChanges array.
+        If the student already changed groups, this section will not be entered,
+        since the old group MUST NOT be updated. */
+        setOldGroup(selectedStudentSRN, getCurrentGroup(selectedStudentSRN));
+    }
+    setCurrentGroup(selectedStudentSRN, newGroupID);
 }

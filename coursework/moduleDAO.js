@@ -1,5 +1,7 @@
 //This is a Data Access Object to retrieve any data from the database.
 
+var origin;
+
 /**
  * This function loads all of the information necessary for the website to run:
  * Module, student and group information.
@@ -8,7 +10,7 @@
  *                         but MUST NOT be null when loading from service.
  */
 function loadAllInfo(moduleObject) { 
-    if(!moduleObject["error"]) {
+    if(moduleObject == null || !moduleObject["error"]) {
         if(origin == "json" && moduleObject == null) {
             loadModuleInfo(module);
             loadStudentInfo(module);
@@ -43,6 +45,7 @@ function loadModuleInfo(moduleObject) {
  * to studentTransfer.js
  */
 function loadStudentInfo(moduleObject) {
+    studentChanges = new Array(); //Creates the student group changes array.
     moduleStudentList = new Array(); //Creates an array of "student" objects
     var allStudents = moduleObject["students"];
     for (var currentStudentID in allStudents) {

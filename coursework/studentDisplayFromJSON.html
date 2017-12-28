@@ -2,12 +2,11 @@
 <head>
     <meta charset=UTF-8>
 	<title>Student groups</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="style-JSON.css">
 </head>
 
 <body>
-	<h1>Student Groups for 6COM9051: More Web Scripting</h1>
-	<!-- TODO Change this to fetch group name from the JSON database -->
+	<h1>Student Groups from JSON database</h1>
 
 	<p>Show 
 		<select id="selectedGroup">
@@ -34,7 +33,7 @@
 			origin = "json";
 			loadAllInfo(null);
 			setHTMLStudentTable("all");
-			setGroupSelectionDropdownList();
+			setGroupFilterDropdown();
 		};
 	</script>
 </body>
