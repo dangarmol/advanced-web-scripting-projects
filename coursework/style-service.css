@@ -1,5 +1,6 @@
 h1 {
-    color: rgb(0, 132, 255);
+    color: rgb(2, 199, 18);
+    text-decoration: underline;
 }
 
 table, th, td {
@@ -12,7 +13,7 @@ table {
 }
 
 th {
-    background-color: green;
+    background-color: black;
     color: white;
 }
 

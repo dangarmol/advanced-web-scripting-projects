@@ -58,11 +58,19 @@ function sortStudentList(sortBy) {
 }
 
 function changeStudentGroup(selectedStudentSRN, newGroupID) {
-    if(getOldGroup(selectedStudentSRN) == null) { //The student has never changed groups.
-        /*The student needs a new entry in the studentChanges array.
-        If the student already changed groups, this section will not be entered,
-        since the old group MUST NOT be updated. */
-        setOldGroup(selectedStudentSRN, getCurrentGroup(selectedStudentSRN));
+    if(getCurrentGroup(selectedStudentSRN) == newGroupID) {
+        alert("The group cannot be changed. The selected group is the same as the original one.");
+    } else {
+        if(getOldGroup(selectedStudentSRN) == null) { //The student has never changed groups.
+            /*The student needs a new entry in the studentChanges array.
+            If the student already changed groups, this section will not be entered,
+            since the old group MUST NOT be updated. */
+            setOldGroup(selectedStudentSRN, getCurrentGroup(selectedStudentSRN));
+        }
+        setCurrentGroup(selectedStudentSRN, newGroupID);
+
+        if(getOldGroup(selectedStudentSRN) == getCurrentGroup(selectedStudentSRN)) {
+            removeFromStudentChanges(selectedStudentSRN);
+        }
     }
-    setCurrentGroup(selectedStudentSRN, newGroupID);
 }

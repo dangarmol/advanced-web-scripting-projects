@@ -2,6 +2,8 @@
 	<head>
 		<meta charset=UTF-8>
 		<title>Student groups</title>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
 		<link rel="stylesheet" type="text/css" href="style-index.css">
 	</head>
 
@@ -9,7 +11,9 @@
 		<h1>Welcome to the Student Groups Tool</h1>
 
 		<!-- Create images like buttons with links to the tools or add bootstrap -->
-		<p>Show <a href = studentDisplayFromJSON.html>student list from JSON</a></p>
-		<p>Show <a href = studentDisplayFromService.php>student list from external service</a></p>
+		<br>
+		<button class="btn btn-danger" onclick='location.href = "studentDisplayFromJSON.html"'><i class="fa fa-code"></i> Show student list from JSON data</button>
+		<br><br>
+		<button class="btn btn-success" onclick='location.href = "studentDisplayFromService.php"'><i class="fa fa-database"></i> Show student list from an external service</button>
 	</body>
 </html>

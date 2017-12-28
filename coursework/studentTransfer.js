@@ -74,7 +74,17 @@ function setCurrentGroup(studentID, newGroupID) {
     for(var i = 0; i < moduleStudentList.length; i++) {
         if(moduleStudentList[i].srn == studentID) {
             moduleStudentList[i].allocatedGroup = newGroupID;
-            return; //To avoid unnecessary iterations and not throw the exception.
+            return; //To avoid unnecessary iterations and not throw any exception.
+        }
+    }
+    throw new exception("The student has not been found. This point should be unreachable.");
+}
+
+function removeFromStudentChanges(studentID) {
+    for(var i = 0; i < studentChanges.length; i++) {
+        if(studentChanges[i].srn == studentID) {
+            studentChanges.splice(i, 1);
+            return; //To avoid unnecessary iterations and not throw any exception.
         }
     }
     throw new exception("The student has not been found. This point should be unreachable.");

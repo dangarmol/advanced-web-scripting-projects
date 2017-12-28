@@ -24,6 +24,8 @@
 <head>
     <meta charset=UTF-8>
 	<title>Student groups</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
 	<link rel="stylesheet" type="text/css" href="style-service.css">
 </head>
 
@@ -35,7 +37,7 @@
 	</div>
 
 	<div id="selectedGroupDiv">
-		<p>Show 
+		<p><i class="fa fa-filter"></i> Filter
 			<select id="selectedGroup">
 				<option value=*>Loading groups...</option> <!-- For it not to blink empty while loading -->
 			</select>
@@ -43,13 +45,14 @@
 	</div>
 
 	<div id="sortByDropdownDiv">
+		<!-- TODO Add this https://silviomoreto.github.io/bootstrap-select/ -->
 		<p>Sort by... <select id=sortByDropdown>
 			<option value=srn>Student Registration Number</option>
 			<option value=fname>First name</option>
 			<option value=lname>Last name</option>
 			<option value=gname>Group Name</option>
 		</select>
-		<button id=sortButton>Sort students</button>
+		<button id=sortButton class="btn btn-primary"><i class="fa fa-sort-amount-asc"></i> Sort students</button>
 		</p>
 	</div>
 
@@ -62,17 +65,17 @@
 			<select id=selectGroupFromList>
 				<option value=*>Loading group list...</option>
 			</select>
-			<button id=groupChangeButton>Change group</button>
+			<button id=groupChangeButton class="btn btn-primary"><i class="fa fa-exchange"></i> Change group</button>
 		</p>
 	</div>
 
 	<div id="toggleChangesDiv">
-		<button id=toggleChanges>Toggle new/old groups</button>
-		<!-- TODO Change colour for groups that have been modified -->
+		<button id=toggleChanges class="btn btn-info"><i class="fa fa-eye"></i> Toggle new/old groups</button>
+		<p id=currentDisplay>Displaying <span class=new-group><b>Current</b></span> groups.</p>
 	</div>
 
 	<div id="uploadChangesDiv">
-		<button id=uploadButton>Check and upload data</button>
+		<button id=uploadButton class="btn btn-primary"><i class="fa fa-paper-plane"></i> Check and upload all data</button>
 	</div>
 
 	<div id="modifiedMessageDiv"></div>
@@ -118,15 +121,19 @@
 		document.getElementById("groupChangeButton").onclick = function () {
 			var selectedStudentSRN = document.getElementById("selectStudentFromList").selectedOptions[0].value;
 			var selectedGroupID = document.getElementById("selectGroupFromList").selectedOptions[0].value;
+			if(getCurrentGroup(selectedStudentSRN) != selectedGroupID) {
+				setModifiedMessage();
+			}
 			changeStudentGroup(selectedStudentSRN, selectedGroupID);
 			setHTMLStudentTable(currentView); //For the table to refresh
-			setModifiedMessage();
 		} //Sets the action listener for the group changing button.
 
 		document.getElementById("toggleChanges").onclick = function () {
 			if(currentToggle == "new") {
+				document.getElementById("currentDisplay").innerHTML = "<p id=currentDisplay>Displaying <span class=old-group><b>Original</b></span> groups.</p>";
 				currentToggle = "old";
 			} else {
+				document.getElementById("currentDisplay").innerHTML = "<p id=currentDisplay>Displaying <span class=new-group><b>Current</b></span> groups.</p>";
 				currentToggle = "new";
 			}
 

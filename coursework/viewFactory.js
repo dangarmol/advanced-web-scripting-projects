@@ -139,6 +139,6 @@ function createHTMLStudentTableError() {
 }
 
 function createModifiedMessage() {
-    var modifiedStudentsMessage = "<p>One or more of the students have been moved to a different group.<br>Their new group appears in green, to check their original groups, click on the Toggle button and they will appear in yellow.<br>To check that no group is empty and upload the groups, click on the other button.</p>";
+    var modifiedStudentsMessage = "<p><br><i>It seems like one or more students have been moved to a different group.<br>Their new group appears in <span class=new-group>green</span>. To check their original groups, click on the Toggle button and they will appear in <span class=old-group>red</span>.<br><br>To check that no group is empty and upload the modified groups, click on the second button.</i></p>";
     return modifiedStudentsMessage;
 }
