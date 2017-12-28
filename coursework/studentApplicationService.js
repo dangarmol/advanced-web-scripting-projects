@@ -11,6 +11,7 @@ function getFullStudentList() {
 /**
  * Returns an array with every student object that belongs to a certain group.
  * @param {*} groupID The ID of the group of the students belong to or "all"
+ * @returns 
  */
 function getStudentListByGroup (groupID) {
     if(groupID == "all") return moduleStudentList;

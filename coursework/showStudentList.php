@@ -29,9 +29,9 @@
 
 <body>
 	<div id="backButtonDiv">
-		<h2>
+		<h3>
 			<a href=studentDisplayFromService.php>&#8617 Go back!</a>
-		</h2>
+		</h3>
 	</div>
 
 	<div id="selectedGroupDiv">

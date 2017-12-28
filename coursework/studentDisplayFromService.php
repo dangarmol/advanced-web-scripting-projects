@@ -2,16 +2,16 @@
 <head>
     <meta charset=UTF-8>
 	<title>Student groups</title>
-	<link rel="stylesheet" type="text/css" href="style-index.css">
+	<link rel="stylesheet" type="text/css" href="style-service.css">
 </head>
 
 <body>
 	<h1>Student Groups Tool</h1>
 
 	<div id="backButtonDiv">
-		<h2>
+		<h3>
 			<a href=index.html>&#8617 Go back to the main menu!</a>
-		</h2>
+		</h3>
 	</div>
 
 	<h3>Write the level and module you want to get the student list from:</h3>

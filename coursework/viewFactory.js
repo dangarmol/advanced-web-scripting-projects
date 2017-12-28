@@ -134,7 +134,7 @@ function createStudentListDropdown(groupID) {
 }
 
 function createHTMLStudentTableError() {
-    var studentTableHTMLError = "<h3>The module code or level is incorrent. Click <a href=studentDisplayFromService.php>here</a> to go back to the module selection.</h3>"; //Add bootstrap format here.
+    var studentTableHTMLError = "<h3>The module code or level is incorrect. Click <a href=studentDisplayFromService.php>here</a> to go back to the module selection.</h3>"; //Add bootstrap format here.
     return studentTableHTMLError;
 }
 

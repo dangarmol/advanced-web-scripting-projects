@@ -9,8 +9,7 @@ var moduleStudentList;
  * It should have the following format:
  * studentChanges = Array({
  *  "studentID",
- *  "previousGroupID",
- *  "newGroupID"
+ *  "previousGroupID"
  * });
  * 
  * Example:
@@ -19,7 +18,6 @@ var moduleStudentList;
  *                   {"srn" : "13544964", "previousGroupID" : "690548"}]
  */
 var studentChanges;
-//Only use previousGroupID
 
 /* TODO Implement this with a HashMap to get a better efficiency.
 Otherwise, complexity while loading the list would be O(n^2) in the worst cases,

@@ -27,7 +27,7 @@ function setModifiedMessage () {
 }
 
 function handleErrorView () {
-    //Removes the elements and only leaves the error message.
+    //Removes the elements and only leaves the error message on screen.
     document.getElementById("backButtonDiv").innerHTML = "";
     document.getElementById("sortByDropdownDiv").innerHTML = "";
     document.getElementById("modifyStudentDiv").innerHTML = "";
