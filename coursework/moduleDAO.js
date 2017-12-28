@@ -8,16 +8,21 @@
  *                         but MUST NOT be null when loading from service.
  */
 function loadAllInfo(moduleObject) { 
-    if(origin == "json" && moduleObject == null) {
-        loadModuleInfo(module);
-        loadStudentInfo(module);
-        loadGroupInfo(module);
-    } else if(origin == "service" && moduleObject != null) {
-        loadModuleInfo(moduleObject);
-        loadStudentInfo(moduleObject);
-        loadGroupInfo(moduleObject);
+    if(!moduleObject["error"]) {
+        if(origin == "json" && moduleObject == null) {
+            loadModuleInfo(module);
+            loadStudentInfo(module);
+            loadGroupInfo(module);
+        } else if(origin == "service" && moduleObject != null) {
+            loadModuleInfo(moduleObject);
+            loadStudentInfo(moduleObject);
+            loadGroupInfo(moduleObject);
+        } else {
+            console.log("Error handling the loading information. This should never be reached.");
+        }
+        return true;
     } else {
-        console.log("Error handling the loading information. This should never be reached.");
+        return false;
     }
 }
 

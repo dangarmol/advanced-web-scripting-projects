@@ -4,7 +4,7 @@ var moduleStudentList;
 
 /**
  * This is a delta kind of object. That means that it doesn't reflect the current state of the
- * students, but instead it's only a list of the changes, a diferential, hence its kind name.
+ * students, but instead it's only a list of the changes, a diferential, hence its name.
  * 
  * It should have the following format:
  * studentChanges = Array({
@@ -19,6 +19,7 @@ var moduleStudentList;
  *                   {"studentID" : "13544964", "previousGroupID" : "690548", "newGroupID" : "690532"}]
  */
 var studentChanges;
+//Only use previousGroupID
 
 /**
  * TODO Implement this with a HashMap to get a better efficiency.

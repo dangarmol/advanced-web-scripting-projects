@@ -1,14 +1,20 @@
 <?php
 	function get_students_from_group() {
 		$levelInput = "ERROR";
-		$codeInput = "ERROR"; //TODO Check variable contents before calling the function.
+		$codeInput = "ERROR";
+		//In case the user doesn't input any characters.
 
 		if (isset($_GET['levelInput'])) $levelInput=$_GET['levelInput'];
 		if (isset($_GET['codeInput'])) $codeInput=$_GET['codeInput'];
 
-		$url = "http://homepages.herts.ac.uk/%7Ecomqgrs/ads/moduleGroups.php?moduleCode=";
-		$fullURL = $url.$levelInput."com".$codeInput; //Concatenates strings together
-		$jsonOutput = file_get_contents($fullURL);
+		if(is_numeric($levelInput) && is_numeric($codeInput) && $levelInput >= 4 &&
+		$levelInput <= 7 && $codeInput >= 1000 && $codeInput <= 9999) {
+			$url = "http://homepages.herts.ac.uk/%7Ecomqgrs/ads/moduleGroups.php?moduleCode=";
+			$fullURL = $url.$levelInput."com".$codeInput; //Concatenates strings together
+			$jsonOutput = file_get_contents($fullURL);
+		} else {
+			$jsonOutput = '{"error": "true"}';
+		}
 
 		return $jsonOutput;
 	}
@@ -26,6 +32,14 @@
 		<h2>
 			<a href=studentDisplayFromService.php>&lt-- Go back!</a>
 		</h2>
+	</div>
+
+	<div id="sortByDropdownDiv">
+		<p>Show 
+			<select id="selectedGroup">
+				<option value=*>Loading students...</option> <!-- For it not to blink empty while loading -->
+			</select>
+		</p>
 	</div>
 
 	<div id="sortByDropdownDiv">
@@ -48,7 +62,7 @@
 			<select id=selectGroupFromList>
 				<option value=*>Loading group list...</option>
 			</select>
-			<button id=sortButton>Change group</button>
+			<button id=groupChangeButton>Change group</button>
 		</p>
 	</div>
 
@@ -74,19 +88,30 @@
 	<script type="text/javascript">
 		window.onload = function() {
 			origin = "service";
-			loadAllInfo(<?php echo get_students_from_group();?>);
-			setHTMLStudentTable("all");
+			var correctLoad = loadAllInfo(<?php echo get_students_from_group();?>);
+			if(correctLoad) {
+				setHTMLStudentTable("all");
+			} else {
+				handleErrorView();
+				setHTMLStudentTableError();
+			}
 			setGroupListDropdown();
-			setStudentListDropdown();
+			setStudentListDropdown("all"); //This should be changed for the times when it's not needed to display all students.
 		};
+
+		document.getElementById("selectedGroup").onchange = function () {
+			setHTMLStudentTable(document.getElementById("selectedGroup").selectedOptions[0].value);
+		} //Sets the action listener for the dropdown list.
 
 		document.getElementById("sortButton").onclick = function () {
 			sortStudentList(document.getElementById("sortByDropdown").selectedOptions[0].value);
 			setHTMLStudentTable("all"); //For the table to refresh
 		} //Sets the action listener for the sorting button.
 
-		document.getElementById("sortButton").onclick = function () {
-			sortStudentList(document.getElementById("sortByDropdown").selectedOptions[0].value);
+		document.getElementById("groupChangeButton").onclick = function () {
+			var selectedStudentSRN = document.getElementById("sortByDropdown").selectedOptions[0].value;
+			var selectedGroupID = document.getElementById("sortByDropdown").selectedOptions[0].value;
+			changeStudentGroup(selectedStudentSRN, selectedGroupID);
 			setHTMLStudentTable("all"); //For the table to refresh
 		} //Sets the action listener for the group changing button.
 

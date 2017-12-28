@@ -92,10 +92,15 @@ function createGroupListDropdown() {
 /**
  * 
  */
-function createStudentListDropdown() {
+function createStudentListDropdown(groupID) {
     var dropdownListHTML = "";
-
-    var studentList = getFullStudentList();
+    var studentList;
+    
+    if(groupID == "all") {
+        studentList = getFullStudentList();
+    } else {
+        studentList = getStudentListByGroup(groupID);
+    }
 
     if(studentList.length > 0) {
         for(var i = 0; i < studentList.length; i++) {
@@ -110,4 +115,10 @@ function createStudentListDropdown() {
         dropdownListHTML += "<h3>There are no groups to display in the dropdown list!</h3>"; //Add bootstrap format here.
     }
     return dropdownListHTML;
+}
+
+function createHTMLStudentTableError() {
+    studentTableHTML = "<h3>The module code or level is incorrent. Click <a href=studentDisplayFromService.php>here</a> to go back to the module selection.</h3>"; //Add bootstrap format here.
+    
+    return studentTableHTML;
 }
