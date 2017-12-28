@@ -52,12 +52,12 @@
 		</p>
 	</div>
 
-	<div id="toggleChanges">
+	<div id="toggleChangesDiv">
 		<button id=toggleChanges>Toggle new/old groups</button>
 		<!-- TODO Change colour for groups that have been modified -->
 	</div>
 
-	<div id="uploadChanges">
+	<div id="uploadChangesDiv">
 		<button id=uploadButton>Check and upload data</button>
 	</div>
 
@@ -74,15 +74,6 @@
 	<script type="text/javascript">
 		window.onload = function() {
 			origin = "service";
-			/* try{
-				loadAllInfo(...);
-				//TODO This needs to be fixed for the cases where the format entered is not correct!
-			} catch (exception) {
-				alert("Invalid data entered, please try again.");
-				window.location.href = "studentDisplayFromService.php";
-			} finally {
-				setHTMLStudentTable("all");
-			} */
 			loadAllInfo(<?php echo get_students_from_group();?>);
 			setHTMLStudentTable("all");
 			setGroupListDropdown();
@@ -92,7 +83,22 @@
 		document.getElementById("sortButton").onclick = function () {
 			sortStudentList(document.getElementById("sortByDropdown").selectedOptions[0].value);
 			setHTMLStudentTable("all"); //For the table to refresh
-		} //Sets the action listener for the dropdown list.
+		} //Sets the action listener for the sorting button.
+
+		document.getElementById("sortButton").onclick = function () {
+			sortStudentList(document.getElementById("sortByDropdown").selectedOptions[0].value);
+			setHTMLStudentTable("all"); //For the table to refresh
+		} //Sets the action listener for the group changing button.
+
+		document.getElementById("toggleChanges").onclick = function () {
+			sortStudentList(document.getElementById("sortByDropdown").selectedOptions[0].value);
+			setHTMLStudentTable("all"); //For the table to refresh
+		} //Sets the action listener for the toggleChanges button.
+
+		document.getElementById("uploadButton").onclick = function () {
+			sortStudentList(document.getElementById("sortByDropdown").selectedOptions[0].value);
+			setHTMLStudentTable("all"); //For the table to refresh
+		} //Sets the action listener for the uploading button.
 	</script>
 </body>
 </html>
