@@ -22,3 +22,8 @@ function getGroupName(groupID) {
     //If it is not found...
     return "ERROR"; 
 }
+
+function changeGroupsOnStudentChange(selectedStudentSRN, oldGroupID, newGroupID) {
+    removeMember(selectedStudentSRN, oldGroupID);
+    addMember(selectedStudentSRN, newGroupID);
+}

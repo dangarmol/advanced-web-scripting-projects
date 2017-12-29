@@ -16,6 +16,7 @@ function getFullStudentList() {
 function getStudentListByGroup (groupID) {
     if(groupID == "all") return moduleStudentList;
 
+    //Done like this because it was necessary to iterate to get all students anyway.
     var selectedStudents = new Array();
     for (var currentStudentID in moduleStudentList) {
 		if(moduleStudentList[currentStudentID].allocatedGroup == groupID) {
@@ -59,8 +60,10 @@ function sortStudentList(sortBy) {
 
 function changeStudentGroup(selectedStudentSRN, newGroupID) {
     if(getCurrentGroup(selectedStudentSRN) == newGroupID) {
-        alert("The group cannot be changed. The selected group is the same as the original one.");
+        alert("The group cannot be changed. The selected group is the same as the one the student is currently in.");
     } else {
+        changeGroupsOnStudentChange(selectedStudentSRN, getCurrentGroup(selectedStudentSRN), newGroupID);
+        
         if(getOldGroup(selectedStudentSRN) == null) { //The student has never changed groups.
             /*The student needs a new entry in the studentChanges array.
             If the student already changed groups, this section will not be entered,

@@ -68,4 +68,6 @@ function loadGroupInfo(moduleObject) {
     }
 }
 
-//"Upload group info" will be here.
+function uploadAllData() {
+    //TODO Only this function is missing.
+}

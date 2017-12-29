@@ -26,45 +26,58 @@
 	<title>Student groups</title>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+
 	<link rel="stylesheet" type="text/css" href="style-service.css">
+
+	<!-- Added this https://silviomoreto.github.io/bootstrap-select/ -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('.selectpicker').selectpicker();
+		});
+	</script>
 </head>
 
 <body>
 	<div id="backButtonDiv">
 		<h3>
-			<a href=studentDisplayFromService.php>&#8617 Go back!</a>
+			<a href=studentDisplayFromService.php>&#8617 Go back to module selection!</a>
 		</h3>
 	</div>
 
 	<div id="selectedGroupDiv">
 		<p><i class="fa fa-filter"></i> Filter
-			<select id="selectedGroup">
+			<select id="selectedGroup" class=selectpicker data-width="auto">
 				<option value=*>Loading groups...</option> <!-- For it not to blink empty while loading -->
 			</select>
 		</p>
 	</div>
 
 	<div id="sortByDropdownDiv">
-		<!-- TODO Add this https://silviomoreto.github.io/bootstrap-select/ -->
-		<p>Sort by... <select id=sortByDropdown>
+		<p>Sort by... <select id=sortByDropdown class=selectpicker data-width="auto">
 			<option value=srn>Student Registration Number</option>
 			<option value=fname>First name</option>
 			<option value=lname>Last name</option>
-			<option value=gname>Group Name</option>
+			<option value=gname>Current Group Name</option>
 		</select>
+		<i class="fa fa-caret-right"></i>
 		<button id=sortButton class="btn btn-primary"><i class="fa fa-sort-amount-asc"></i> Sort students</button>
 		</p>
 	</div>
 
 	<div id="modifyStudentDiv">
 		<p>Change student
-			<select id=selectStudentFromList>
+			<select id=selectStudentFromList class=selectpicker data-width="auto" title="Student SRN" data-live-search="true">
 				<option value=*>Loading student list...</option>
 			</select>
 			to group
-			<select id=selectGroupFromList>
+			<select id=selectGroupFromList class=selectpicker data-width="auto" title="Destination group" data-live-search="true">
 				<option value=*>Loading group list...</option>
 			</select>
+			<i class="fa fa-caret-right"></i>
 			<button id=groupChangeButton class="btn btn-primary"><i class="fa fa-exchange"></i> Change group</button>
 		</p>
 	</div>
@@ -75,7 +88,7 @@
 	</div>
 
 	<div id="uploadChangesDiv">
-		<button id=uploadButton class="btn btn-primary"><i class="fa fa-paper-plane"></i> Check and upload all data</button>
+		<button id=uploadButton class="btn btn-success"><i class="fa fa-paper-plane"></i> Check and upload all data</button>
 	</div>
 
 	<div id="modifiedMessageDiv"></div>
@@ -105,6 +118,8 @@
 				handleErrorView();
 				setHTMLStudentTableError();
 			}
+
+			$('.selectpicker').selectpicker('refresh');
 		};
 
 		document.getElementById("selectedGroup").onchange = function () {
@@ -141,7 +156,16 @@
 		} //Sets the action listener for the toggleChanges button.
 
 		document.getElementById("uploadButton").onclick = function () {
-			
+			if(emptyGroups()) {
+				alert("There is at least one empty group. Please fix this before trying to upload the data.");
+			} else {
+				var success = uploadAllData();
+				if(success) {
+					alert("Module information successfully uploaded.");
+				} else {
+					alert("There has been an error while uploading the data. Please try again.");
+				}
+			}
 		} //Sets the action listener for the uploading button.
 	</script>
 </body>
