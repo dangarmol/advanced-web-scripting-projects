@@ -69,5 +69,7 @@ function loadGroupInfo(moduleObject) {
 }
 
 function uploadAllData() {
+    //Send a post request to...
+    //"http://homepages.herts.ac.uk/~comqgrs/ads/moduleGroupUpdates.php"
     //TODO Only this function is missing.
 }
