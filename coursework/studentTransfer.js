@@ -23,6 +23,12 @@ var studentChanges;
 Otherwise, complexity while loading the list would be O(n^2) in the worst cases,
 with HashMap it would improve to O(n). */
 
+function getAllStudentData() {
+    var studentData = {moduleStudentList, studentChanges};
+    
+    return studentData;
+}
+
 /**
  * 
  * @param {*} studentID 

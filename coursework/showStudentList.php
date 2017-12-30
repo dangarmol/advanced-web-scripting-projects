@@ -1,5 +1,5 @@
 <?php
-	require_once ("requestHandler.php");
+	require_once ("serverRequestHandler.php");
 ?>
 
 <html>
@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 	<script>
+		//Initialise the selectPicker dropdown boxes.
 		$(document).ready(function () {
 			$('.selectpicker').selectpicker();
 		});
@@ -40,24 +41,24 @@
 
 	<div id="sortByDropdownDiv">
 		<p>Sort by... <select id=sortByDropdown class=selectpicker data-width="auto">
-			<option value=srn>Student Registration Number</option>
-			<option value=fname>First name</option>
-			<option value=lname>Last name</option>
-			<option value=gname>Current Group Name</option>
-		</select>
-		<i class="fa fa-caret-right"></i>
-		<button id=sortButton class="btn btn-primary"><i class="fa fa-sort-amount-asc"></i> Sort students</button>
+				<option value=srn>Student Registration Number</option>
+				<option value=fname>First name</option>
+				<option value=lname>Last name</option>
+				<option value=gname>Current Group Name</option>
+			</select>
+			<i class="fa fa-caret-right"></i>
+			<button id=sortButton class="btn btn-primary"><i class="fa fa-sort-amount-asc"></i> Sort students</button>
 		</p>
 	</div>
 
 	<div id="modifyStudentDiv">
 		<p>Change student
 			<select id=selectStudentFromList class=selectpicker data-width="auto" title="Student SRN" data-live-search="true">
-				<option value=*>Loading student list...</option>
+				<option value=*>Loading student list...</option> <!-- For it not to blink empty while loading -->
 			</select>
 			to group
 			<select id=selectGroupFromList class=selectpicker data-width="auto" title="Destination group" data-live-search="true">
-				<option value=*>Loading group list...</option>
+				<option value=*>Loading group list...</option> <!-- For it not to blink empty while loading -->
 			</select>
 			<i class="fa fa-caret-right"></i>
 			<button id=groupChangeButton class="btn btn-primary"><i class="fa fa-exchange"></i> Change group</button>
@@ -101,6 +102,7 @@
 				setHTMLStudentTableError();
 			}
 
+			//Refresh the dropdown boxes once the items have been added.
 			$('.selectpicker').selectpicker('refresh');
 		};
 
@@ -138,18 +140,17 @@
 		} //Sets the action listener for the toggleChanges button.
 
 		document.getElementById("uploadButton").onclick = function () {
-			if(emptyGroups()) {
+			if(checkEmptyGroups()) {
 				alert("There is at least one empty group. Please fix this before trying to upload the data.");
 			} else {
-				var success = <?php echo upload_results() ?>;
-				//TODO Is this a boolean?
-				if(success) {
-					alert("Module information successfully uploaded.");
-				} else {
-					alert("There has been an error while uploading the data. Please try again.");
+				try {
+					uploadAllData();
+					alert("Module information successfully uploaded. You will be redirected to the module selection screen.");
+				} catch (error) {
+					alert("There has been an error while uploading the data. Please try again. \n" + error);
 				}
 			}
-		} //Sets the action listener for the uploading button.
+		} //Sets the action listener for the upload button.
 	</script>
 </body>
 </html>

@@ -20,9 +20,9 @@
 	<p><b><i>It should be in the format "XcomYYYY"</b></i></p>
 
 	<form action="showStudentList.php">
-		<input style="width:15px;" type="text" name="levelInput" maxlength="1"/>
+		<input style="width:25px;" type="text" name="levelInput" placeholder="X" maxlength="1"/>
 		<span><i>COM</i></span>
-		<input style="width:40px;" type="text" name="codeInput" maxlength="4"/>
+		<input style="width:50px;" type="text" name="codeInput" placeholder="YYYY" maxlength="4"/>
 		<button input type=submit id=moduleButton class="btn btn-primary"><i class="fa fa-search"></i> Go!</button>
 	</form>
 </body>

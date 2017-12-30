@@ -3,3 +3,9 @@
 var moduleCode;
 var moduleName;
 var moduleCohort;
+
+function getAllModuleData() {
+    var moduleData = {moduleCode, moduleName, moduleCohort};
+   
+    return moduleData;
+}

@@ -2,6 +2,9 @@
 
 var origin;
 
+//For debugging purposes. Set to true to display all debug traces in the console.
+var daoDebug = false;
+
 /**
  * This function loads all of the information necessary for the website to run:
  * Module, student and group information.
@@ -20,7 +23,9 @@ function loadAllInfo(moduleObject) {
             loadStudentInfo(moduleObject);
             loadGroupInfo(moduleObject);
         } else {
-            console.log("Error handling the loading information. This should never be reached.");
+            if(daoDebug) {
+                console.log("Error handling the loading information. This should never be reached.");
+            }
         }
         return true;
     } else {
@@ -68,8 +73,110 @@ function loadGroupInfo(moduleObject) {
     }
 }
 
-function uploadAllData() {
-    //Send a post request to...
-    //"http://homepages.herts.ac.uk/~comqgrs/ads/moduleGroupUpdates.php"
-    //TODO Only this function is missing.
+function uploadAllData(ajax) {
+    var allData = {};
+
+    $.extend(allData, getAllModuleData());
+    $.extend(allData, getAllStudentData());
+    $.extend(allData, getAllGroupsData());
+
+    if(daoDebug) {
+        checkServiceIsUp();
+    }
+
+    sendAJAXPostRequest(allData);
+
+    //Sends a post request to...
+    //http://homepages.herts.ac.uk/~comqgrs/ads/moduleGroupUpdates.php
 }
+
+//https://stackoverflow.com/questions/692196/post-request-javascript
+
+function sendAJAXPostRequest(contents) {
+    var url = "http://homepages.herts.ac.uk/~comqgrs/ads/moduleGroupUpdates.php";
+    var xhr = new XMLHttpRequest();
+
+    if (!xhr) {
+        throw new Error("Cannot create XMLHTTP instance.");
+    }
+
+    if(daoDebug) {
+        console.log("The following object will be sent:");
+        console.log(contents);
+        //contents = "Request test string.";
+    }
+
+    xhr.onreadystatechange = function processResponse() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                if(daoDebug) {
+                    console.log("The request has been successful.");
+                }
+            } else {
+                if(daoDebug) {
+                    console.log(xhr.status);
+                }
+                throw new Error("There was a problem with the request.");
+            }	
+        }
+    };
+
+    xhr.open("POST", url);
+    //Send the proper header information along with the request
+    //xhr.setRequestHeader("Student-Info-JSON", "application/x-www-form-urlencoded");
+    xhr.send(contents);
+
+    //console.log(xhr.responseText);
+}
+
+
+/////////////////////////////////////////////////////////////////////////
+//THE FOLLOWING FUNCTIONS HAVE BEEN ADDED FOR THE SERVICE TO BE TESTED.//
+/////////////////////////////////////////////////////////////////////////
+function checkServiceIsUp() {
+	makeNewRequest("http://homepages.herts.ac.uk/~comqgrs/ads/moduleGroupUpdates.php", "POST", processResponse);
+	// http://localhost:8080/studentGroups/uploadModuleGroups.php"
+ }
+
+function makeNewRequest(url, requestType, callbackFunction) {
+	console.log("Making a request to ... " + url);
+    httpRequest = new XMLHttpRequest();
+
+    if (!httpRequest) {
+      console.log('Giving up :( Cannot create an XMLHTTP instance');
+      return false;
+    }
+	body = "Data to upload: ... service check for ADS coursework at "
+	time = new Date
+	body += time.toGMTString()
+
+    httpRequest.onreadystatechange = callbackFunction;
+    httpRequest.open(requestType, url);
+    httpRequest.send(body);
+}
+
+function processResponse() {
+	console.log("Call back to process response: state = " + httpRequest.readyState + "; status = " + httpRequest.status);
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+        console.log("Request returned, displaying response data ... \n--------\n");
+		console.log(httpRequest.responseText);
+
+		// display success message(s), based on element success class
+		for (e of document.getElementsByClassName("success")){
+			e.style.display = "block"		
+		}	
+
+	  } else {
+		console.log('There was a problem with the request.');
+
+ 		// display failure message(s), based on element success class
+		for (e of document.getElementsByClassName("failure")){
+			e.style.display = "block"		
+		}
+      }
+	
+	  // display results div
+	  //document.getElementById("result").style.display = "block"		
+    }
+  }

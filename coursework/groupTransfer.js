@@ -2,6 +2,12 @@
 
 var moduleGroupList;
 
+function getAllGroupsData() {
+    var groupData = {moduleGroupList};
+    
+    return groupData;
+}
+
 function addMember (studentID, groupID) {
     moduleGroupList[getGroupIndex(groupID)]["members"].push(studentID);
 }
@@ -27,16 +33,4 @@ function getGroupIndex (groupID) {
         }
     }
     throw new exception("Group not found, this point should be unreachable.");
-}
-
-/**
- * @returns true if an empty group is found, false otherwise.
- */
-function emptyGroups () {
-    for(var i = 0; i < moduleGroupList.length; i++) {
-        if(moduleGroupList[i]["members"].length < 1) {
-            return true;
-        }
-    }
-    return false;
 }

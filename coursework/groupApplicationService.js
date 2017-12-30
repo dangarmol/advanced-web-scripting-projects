@@ -27,3 +27,15 @@ function changeGroupsOnStudentChange(selectedStudentSRN, oldGroupID, newGroupID)
     removeMember(selectedStudentSRN, oldGroupID);
     addMember(selectedStudentSRN, newGroupID);
 }
+
+/**
+ * @returns true if an empty group is found, false otherwise.
+ */
+function checkEmptyGroups () {
+    for(var i = 0; i < moduleGroupList.length; i++) {
+        if(moduleGroupList[i]["members"].length < 1) {
+            return true;
+        }
+    }
+    return false;
+}
