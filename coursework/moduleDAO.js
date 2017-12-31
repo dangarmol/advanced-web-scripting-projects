@@ -1,8 +1,9 @@
 //This is a Data Access Object to retrieve any data from the database.
 
+//This should be either "json" or "service"
 var origin;
 
-//For debugging purposes. Set to true to display all debug traces in the console.
+//For debugging purposes. Set to true to display all debug traces in the console and check that everything works.
 var daoDebug = false;
 
 /**
@@ -35,8 +36,8 @@ function loadAllInfo(moduleObject) {
 
 /**
  * Loads the information from the "module" object (@ JSON_Database.js)
- * or the information retrieved from the service
- * to moduleTransfer.js
+ * or the information retrieved from the service to moduleTransfer.js
+ * @param {*} moduleObject The JSON information returned from the service or included JS document
  */
 function loadModuleInfo(moduleObject) {
     moduleCode = moduleObject["code"];
@@ -48,6 +49,7 @@ function loadModuleInfo(moduleObject) {
  * Loads the information from the "module" object (@ JSON_Database.js)
  * or the information retrieved from the service
  * to studentTransfer.js
+ * @param {*} moduleObject The JSON information returned from the service or included JS document
  */
 function loadStudentInfo(moduleObject) {
     studentChanges = new Array(); //Creates the student group changes array.
@@ -63,6 +65,7 @@ function loadStudentInfo(moduleObject) {
  * Loads the information from the "module" object (@ JSON_Database.js)
  * or the information retrieved from the service
  * to groupTransfer.js
+ * @param {*} moduleObject The JSON information returned from the service or included JS document
  */
 function loadGroupInfo(moduleObject) {
     moduleGroupList = new Array(); //Creates an array of "group" objects
@@ -73,7 +76,10 @@ function loadGroupInfo(moduleObject) {
     }
 }
 
-function uploadAllData(ajax) {
+/**
+ * Creates a single object given every object.
+ */
+function uploadAllData() {
     var allData = {};
 
     $.extend(allData, getAllModuleData());
@@ -85,13 +91,12 @@ function uploadAllData(ajax) {
     }
 
     sendAJAXPostRequest(allData);
-
-    //Sends a post request to...
-    //http://homepages.herts.ac.uk/~comqgrs/ads/moduleGroupUpdates.php
 }
 
-//https://stackoverflow.com/questions/692196/post-request-javascript
-
+/**
+ * Sends a post request to... http://homepages.herts.ac.uk/~comqgrs/ads/moduleGroupUpdates.php
+ * @param {*} contents The contents of the request.
+ */
 function sendAJAXPostRequest(contents) {
     var url = "http://homepages.herts.ac.uk/~comqgrs/ads/moduleGroupUpdates.php";
     var xhr = new XMLHttpRequest();
@@ -103,7 +108,13 @@ function sendAJAXPostRequest(contents) {
     if(daoDebug) {
         console.log("The following object will be sent:");
         console.log(contents);
+
         //contents = "Request test string.";
+        /*
+            This string was used to check that the request was being returned properly as it can be seen
+            setting daoDebug to true and uncommenting this, since logging the Object result doesn't log the contents
+            of the Object but "Object object" instead, therefore this was tested to make this function simpler.
+        */
     }
 
     xhr.onreadystatechange = function processResponse() {
@@ -130,9 +141,11 @@ function sendAJAXPostRequest(contents) {
 }
 
 
-/////////////////////////////////////////////////////////////////////////
-//THE FOLLOWING FUNCTIONS HAVE BEEN ADDED FOR THE SERVICE TO BE TESTED.//
-/////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+//THE FOLLOWING FUNCTIONS HAVE BEEN ADDED FOR THE SERVICE TO BE TESTED           //
+//AND TAKEN FROM THE SERVICE PROVIDED.                                           //
+//(http://homepages.herts.ac.uk/~comqgrs/ads/moduleGroupUpdatesServiceTest.html) //
+///////////////////////////////////////////////////////////////////////////////////
 function checkServiceIsUp() {
 	makeNewRequest("http://homepages.herts.ac.uk/~comqgrs/ads/moduleGroupUpdates.php", "POST", processResponse);
 	// http://localhost:8080/studentGroups/uploadModuleGroups.php"

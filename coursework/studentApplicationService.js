@@ -1,17 +1,17 @@
 //Application Service for "student"
 
 /**
- * Returns an array with every student object.
+ * @returns an array with every student object.
  */
 function getFullStudentList() {
-    var studentList = moduleStudentList; //TODO Is it necessary to copy this?
+    var studentList = moduleStudentList;
     return studentList;
 }
 
 /**
- * Returns an array with every student object that belongs to a certain group.
+ * 
  * @param {*} groupID The ID of the group of the students belong to or "all"
- * @returns 
+ * @returns an array with every student object that belongs to a certain group or all students, based on the parameter.
  */
 function getStudentListByGroup (groupID) {
     if(groupID == "all") return moduleStudentList;
@@ -28,8 +28,9 @@ function getStudentListByGroup (groupID) {
 
 /**
  * Returns a student array sorted by what the parameter dictates.
- * @param {*} sortBy The parameter must be one of the following:
- *                   {srn, fname, lname, gname}
+ * @param {*} sortBy The parameter should be one of the following: {srn, fname, lname, gname}
+ * @returns 
+ * @throws
  */
 function sortStudentList(sortBy) {
     switch(sortBy) {
@@ -54,10 +55,15 @@ function sortStudentList(sortBy) {
             } );
             break;
         default:
-        throw new exception("Wrong parameter in the sorting function. This should never be reached.");
+            throw new Error("Wrong parameter in the sorting function. This should never be reached.");
     }
 }
 
+/**
+ * 
+ * @param {*} selectedStudentSRN 
+ * @param {*} newGroupID 
+ */
 function changeStudentGroup(selectedStudentSRN, newGroupID) {
     if(getCurrentGroup(selectedStudentSRN) == newGroupID) {
         alert("The group cannot be changed. The selected group is the same as the one the student is currently in.");

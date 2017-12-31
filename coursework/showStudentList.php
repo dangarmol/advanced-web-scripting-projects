@@ -1,5 +1,5 @@
 <?php
-	require_once ("serverRequestHandler.php");
+	require_once ("serverRequestHandlerDAO.php");
 ?>
 
 <html>
@@ -80,7 +80,7 @@
 	<div id="studentTableDiv"></div> <!-- Where the list of students or result will be shown -->
 
 	<script type="text/javascript" src="viewFactory.js"></script>
-	<script type="text/javascript" src="viewManager.js"></script>
+	<script type="text/javascript" src="viewFrontController.js"></script>
 	<script type="text/javascript" src="studentTransfer.js"></script>
 	<script type="text/javascript" src="groupTransfer.js"></script>
 	<script type="text/javascript" src="moduleTransfer.js"></script>

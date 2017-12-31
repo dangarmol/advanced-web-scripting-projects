@@ -2,16 +2,32 @@
 
 var moduleGroupList;
 
+/**
+ * 
+ * @returns all group data for DAO
+ */
 function getAllGroupsData() {
     var groupData = {moduleGroupList};
     
     return groupData;
 }
 
+/**
+ * 
+ * @param {*} studentID SRN to be added
+ * @param {*} groupID group where the student will be added
+ */
 function addMember (studentID, groupID) {
     moduleGroupList[getGroupIndex(groupID)]["members"].push(studentID);
 }
 
+/**
+ * 
+ * @param {*} studentID SRN to be removed
+ * @param {*} groupID groupID to remove the student from
+ * @returns Nothing, just avoids unnecessary iterations and exception.
+ * @throws exception if student not found in group.
+ */
 function removeMember (studentID, groupID) {
     var groupIndex = getGroupIndex(groupID);
     for(var i = 0; i < moduleGroupList[groupIndex]["members"].length; i++) {
@@ -20,9 +36,15 @@ function removeMember (studentID, groupID) {
             return; //To avoid unnecessary iterations.
         }
     }
-    throw new exception("Student not found in group, this point should be unreachable.");
+    throw new Error("Student not found in group, this point should be unreachable.");
 }
 
+/**
+ * 
+ * @param {*} groupID groupID to search
+ * @returns the index of the group given its ID
+ * @throws exception if group not found.
+ */
 function getGroupIndex (groupID) {
     var currIndex = 0;
     for(var i = 0; i < moduleGroupList.length; i++) {
@@ -32,5 +54,5 @@ function getGroupIndex (groupID) {
             currIndex++;
         }
     }
-    throw new exception("Group not found, this point should be unreachable.");
+    throw new Error("Group not found, this point should be unreachable.");
 }

@@ -1,6 +1,7 @@
 /**
  * 
- * @param {*} groupID 
+ * @param {*} groupID could be groupID or "all"
+ * @returns HTML element source
  */
 function createHTMLStudentTable (groupID) {
     var selectedStudents = getStudentListByGroup(groupID);
@@ -60,7 +61,7 @@ function createHTMLStudentTable (groupID) {
 }
 
 /**
- * 
+ * @returns HTML element source
  */
 function createGroupFilterDropdown() {
     var dropdownListHTML = "<option value=all>All students</option>";
@@ -83,7 +84,7 @@ function createGroupFilterDropdown() {
 }
 
 /**
- * 
+ * @returns HTML element source
  */
 function createGroupListDropdown() {
     var dropdownListHTML = "";
@@ -107,6 +108,8 @@ function createGroupListDropdown() {
 
 /**
  * 
+ * @param {*} groupID the groupID or "all"
+ * @returns HTML element source
  */
 function createStudentListDropdown(groupID) {
     var dropdownListHTML = "";
@@ -133,11 +136,17 @@ function createStudentListDropdown(groupID) {
     return dropdownListHTML;
 }
 
+/**
+ * @returns HTML element source
+ */
 function createHTMLStudentTableError() {
     var studentTableHTMLError = "<h3>The module code or level is incorrect. Click <a href=studentDisplayFromService.php>here</a> to go back to the module selection.</h3>"; //Add bootstrap format here.
     return studentTableHTMLError;
 }
 
+/**
+ * @returns HTML element source
+ */
 function createModifiedMessage() {
     var modifiedStudentsMessage = "<p><br><i>It seems like one or more students have been moved to a different group.<br>Their new group appears in <span class=new-group>green</span>. To check their original groups, click on the Toggle button and they will appear in <span class=old-group>red</span>.<br>If they go back to their original group, the changes will be reverted and they will appear in their default white background.<br><br>To check that no group is empty and upload the modified groups, click on the second button.</i></p>";
     return modifiedStudentsMessage;
