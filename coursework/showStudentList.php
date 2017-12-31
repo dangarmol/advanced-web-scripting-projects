@@ -40,7 +40,8 @@
 	</div>
 
 	<div id="sortByDropdownDiv">
-		<p>Sort by... <select id=sortByDropdown class=selectpicker data-width="auto">
+		<p>Sort by...
+			<select id=sortByDropdown class=selectpicker title="Select" data-width="auto">
 				<option value=srn>Student Registration Number</option>
 				<option value=fname>First name</option>
 				<option value=lname>Last name</option>
@@ -146,8 +147,9 @@
 				try {
 					uploadAllData();
 					alert("Module information successfully uploaded. You will be redirected to the module selection screen.");
+					window.location.replace("studentDisplayFromService.php");
 				} catch (error) {
-					alert("There has been an error while uploading the data. Please try again. \n" + error);
+					alert("There has been an error while uploading the data. Please try again.\n" + error);
 				}
 			}
 		} //Sets the action listener for the upload button.
